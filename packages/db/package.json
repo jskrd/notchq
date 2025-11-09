@@ -5,6 +5,7 @@
 		"./*": "./src/*"
 	},
 	"scripts": {
+		"lint": "eslint",
 		"typecheck": "tsc -p tsconfig.json --noEmit"
 	},
 	"dependencies": {
@@ -20,8 +21,11 @@
 		"@types/pg": "^8",
 		"@types/pg-pool": "^2",
 		"dotenv": "^17",
+		"eslint": "^9",
+		"eslint-config-prettier": "^10",
 		"tsx": "^4",
 		"typescript": "^5",
+		"typescript-eslint": "^8",
 		"zod": "^4"
 	}
 }

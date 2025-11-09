@@ -1,6 +1,6 @@
 import { type Kysely, sql } from "kysely";
 
-// biome-ignore lint/suspicious/noExplicitAny: Kysely requires Kysely<any> in migrations
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function up(db: Kysely<any>): Promise<void> {
 	await db.schema
 		.createTable("baskets")
@@ -17,7 +17,7 @@ export async function up(db: Kysely<any>): Promise<void> {
 		.execute();
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: Kysely requires Kysely<any> in migrations
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down(db: Kysely<any>): Promise<void> {
 	await db.schema.dropTable("baskets").execute();
 }
