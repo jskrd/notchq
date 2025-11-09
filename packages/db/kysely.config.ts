@@ -1,7 +1,7 @@
+import { env } from "./src/env.js";
 import { PostgresDialect } from "kysely";
 import { defineConfig } from "kysely-ctl";
 import Pool from "pg-pool";
-import { env } from "./src/env.js";
 
 const dialect = new PostgresDialect({
 	pool: new Pool({
