@@ -3,18 +3,18 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-	title: "Book",
-	description: "",
+  title: "Book",
+  description: "",
 };
 
 type RootLayoutProps = {
-	children: ReactNode;
+  children: ReactNode;
 };
 
 export default function RootLayout({ children }: RootLayoutProps): ReactNode {
-	return (
-		<html lang="en">
-			<body>{children}</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 }

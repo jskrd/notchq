@@ -1,23 +1,23 @@
 {
-	"type": "module",
-	"scripts": {
-		"build": "pnpm -r run build",
-		"db": "pnpm --filter @repo/db exec kysely --",
-		"db:down": "pnpm --filter @repo/db exec kysely migrate rollback --all",
-		"db:seed": "pnpm --filter @repo/db exec kysely seed run",
-		"db:up": "pnpm --filter @repo/db exec kysely migrate latest",
-		"dev": "pnpm -r run dev",
-		"format": "prettier --write .",
-		"lint": "pnpm -r run lint",
-		"start": "pnpm -r run start",
-		"typecheck": "pnpm -r run typecheck"
-	},
-	"engines": {
-		"node": "^24",
-		"pnpm": "^10"
-	},
-	"devDependencies": {
-		"@trivago/prettier-plugin-sort-imports": "^6",
-		"prettier": "3.6.2"
-	}
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "db": "pnpm --filter @repo/db exec kysely --",
+    "db:down": "pnpm --filter @repo/db exec kysely migrate rollback --all",
+    "db:seed": "pnpm --filter @repo/db exec kysely seed run",
+    "db:up": "pnpm --filter @repo/db exec kysely migrate latest",
+    "dev": "pnpm -r run dev",
+    "format": "prettier --write .",
+    "lint": "pnpm -r run lint",
+    "start": "pnpm -r run start",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "engines": {
+    "node": "^24",
+    "pnpm": "^10"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6",
+    "prettier": "3.6.2"
+  }
 }

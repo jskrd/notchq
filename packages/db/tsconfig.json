@@ -1,10 +1,10 @@
 {
-	"extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node24/tsconfig"],
-	"compilerOptions": {
-		"paths": {
-			"@repo/db/*": ["./src/*"]
-		}
-	},
-	"include": ["**/*.ts"],
-	"exclude": ["node_modules"]
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node24/tsconfig"],
+  "compilerOptions": {
+    "paths": {
+      "@repo/db/*": ["./src/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

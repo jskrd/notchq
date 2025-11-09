@@ -3,71 +3,71 @@ import type { NewOffering, Offering, OfferingUpdate } from "@repo/db/types.js";
 import { sql } from "kysely";
 
 export async function findOfferingById(
-	id: number,
+  id: number,
 ): Promise<Offering | undefined> {
-	return await db
-		.selectFrom("offerings")
-		.where("id", "=", id)
-		.where("deleted_at", "is", null)
-		.selectAll()
-		.executeTakeFirst();
+  return await db
+    .selectFrom("offerings")
+    .where("id", "=", id)
+    .where("deleted_at", "is", null)
+    .selectAll()
+    .executeTakeFirst();
 }
 
 export async function findOfferingBySlug(
-	businessId: number,
-	slug: string,
+  businessId: number,
+  slug: string,
 ): Promise<Offering | undefined> {
-	return await db
-		.selectFrom("offerings")
-		.where("business_id", "=", businessId)
-		.where("slug", "=", slug)
-		.where("deleted_at", "is", null)
-		.selectAll()
-		.executeTakeFirst();
+  return await db
+    .selectFrom("offerings")
+    .where("business_id", "=", businessId)
+    .where("slug", "=", slug)
+    .where("deleted_at", "is", null)
+    .selectAll()
+    .executeTakeFirst();
 }
 
 export async function findOfferingsByBusinessId(
-	businessId: number,
+  businessId: number,
 ): Promise<Offering[]> {
-	return await db
-		.selectFrom("offerings")
-		.where("business_id", "=", businessId)
-		.where("deleted_at", "is", null)
-		.selectAll()
-		.execute();
+  return await db
+    .selectFrom("offerings")
+    .where("business_id", "=", businessId)
+    .where("deleted_at", "is", null)
+    .selectAll()
+    .execute();
 }
 
 export async function createOffering(offering: NewOffering): Promise<Offering> {
-	return await db
-		.insertInto("offerings")
-		.values(offering)
-		.returningAll()
-		.executeTakeFirstOrThrow();
+  return await db
+    .insertInto("offerings")
+    .values(offering)
+    .returningAll()
+    .executeTakeFirstOrThrow();
 }
 
 export async function updateOffering(
-	id: number,
-	updateWith: OfferingUpdate,
+  id: number,
+  updateWith: OfferingUpdate,
 ): Promise<void> {
-	await db
-		.updateTable("offerings")
-		.set({
-			...updateWith,
-			updated_at: sql`now()`,
-		})
-		.where("id", "=", id)
-		.where("deleted_at", "is", null)
-		.execute();
+  await db
+    .updateTable("offerings")
+    .set({
+      ...updateWith,
+      updated_at: sql`now()`,
+    })
+    .where("id", "=", id)
+    .where("deleted_at", "is", null)
+    .execute();
 }
 
 export async function softDeleteOffering(
-	id: number,
+  id: number,
 ): Promise<Offering | undefined> {
-	return await db
-		.updateTable("offerings")
-		.set({ deleted_at: sql`now()` })
-		.where("id", "=", id)
-		.where("deleted_at", "is", null)
-		.returningAll()
-		.executeTakeFirst();
+  return await db
+    .updateTable("offerings")
+    .set({ deleted_at: sql`now()` })
+    .where("id", "=", id)
+    .where("deleted_at", "is", null)
+    .returningAll()
+    .executeTakeFirst();
 }
