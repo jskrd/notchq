@@ -1,1 +1,8 @@
+.claude/
+**/.next/
+**/*.min.css
+**/*.min.js
+**/build/
+**/dist/
+**/out/
 pnpm-lock.yaml
