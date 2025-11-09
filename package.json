@@ -1,13 +1,16 @@
 {
 	"type": "module",
 	"scripts": {
+		"build": "pnpm -r run build",
 		"check": "biome check --write --",
 		"db": "pnpm --filter @repo/db exec kysely --",
 		"db:down": "pnpm --filter @repo/db exec kysely migrate rollback --all",
 		"db:seed": "pnpm --filter @repo/db exec kysely seed run",
 		"db:up": "pnpm --filter @repo/db exec kysely migrate latest",
+		"dev": "pnpm -r run dev",
 		"format": "biome format --write --",
 		"lint": "biome lint --write --",
+		"start": "pnpm -r run start",
 		"typecheck": "pnpm -r run typecheck"
 	},
 	"engines": {
