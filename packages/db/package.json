@@ -1,0 +1,27 @@
+{
+	"name": "@repo/db",
+	"type": "module",
+	"exports": {
+		"./*": "./src/*"
+	},
+	"scripts": {
+		"typecheck": "tsc -p tsconfig.json --noEmit"
+	},
+	"dependencies": {
+		"kysely": "v0.28.8",
+		"kysely-ctl": "v0.19.0",
+		"pg": "^8",
+		"pg-pool": "^3"
+	},
+	"devDependencies": {
+		"@faker-js/faker": "^9",
+		"@tsconfig/node24": "^24",
+		"@tsconfig/strictest": "^2",
+		"@types/pg": "^8",
+		"@types/pg-pool": "^2",
+		"dotenv": "^17",
+		"tsx": "^4",
+		"typescript": "^5",
+		"zod": "^4"
+	}
+}
