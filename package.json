@@ -1,0 +1,16 @@
+{
+	"type": "module",
+	"scripts": {
+		"check": "biome check --write --",
+		"format": "biome format --write --",
+		"lint": "biome lint --write --",
+		"typecheck": "pnpm -r run typecheck"
+	},
+	"engines": {
+		"node": "^24",
+		"pnpm": "^10"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.4"
+	}
+}
