@@ -10,9 +10,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/db": "workspace:*",
     "next": "^16",
     "react": "^19",
-    "react-dom": "^19"
+    "react-day-picker": "^9",
+    "react-dom": "^19",
+    "zod": "^4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

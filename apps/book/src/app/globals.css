@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-tablet: calc(610px + calc(21px * 2));
+  --breakpoint-desktop: calc(987px + calc(21px * 2));
+
+  --spacing-*: initial;
+  --spacing-1: 1px;
+  --spacing-2: 2px;
+  --spacing-3: 3px;
+  --spacing-5: 5px;
+  --spacing-8: 8px;
+  --spacing-13: 13px;
+  --spacing-21: 21px;
+  --spacing-34: 34px;
+  --spacing-55: 55px;
+  --spacing-89: 89px;
+  --spacing-144: 144px;
+  --spacing-233: 233px;
+  --spacing-377: 377px;
+  --spacing-610: 610px;
+  --spacing-987: 987px;
+  --spacing-1597: 1597px;
+
+  --text-13: 13px;
+  --text-13--font-weight: 400;
+  --text-13--line-height: 13px;
+
+  --text-21: 21px;
+  --text-21--font-weight: 400;
+  --text-21--line-height: 21px;
+
+  --text-34: 34px;
+  --text-34--font-weight: 400;
+  --text-34--line-height: 34px;
+
+  --text-55: 55px;
+  --text-55--font-weight: 400;
+  --text-55--line-height: 55px;
+
+  --text-89: 89px;
+  --text-89--font-weight: 400;
+  --text-89--line-height: 89px;
+}
