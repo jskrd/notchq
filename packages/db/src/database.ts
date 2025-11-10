@@ -1,6 +1,6 @@
 import { env } from "@repo/db/env";
 import type { Database } from "@repo/db/types";
-import { Kysely, PostgresDialect } from "kysely";
+import { Kysely, PostgresDialect, sql } from "kysely";
 import Pool from "pg-pool";
 
 const dialect = new PostgresDialect({
@@ -12,3 +12,5 @@ const dialect = new PostgresDialect({
 export const db = new Kysely<Database>({
   dialect,
 });
+
+export { sql };
