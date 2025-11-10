@@ -41,8 +41,8 @@ export default async function Offering({ params }: Props): Promise<ReactNode> {
           priority
         />
       </div>
-      <h1 className="mt-55 font-bold text-34 leading-34">{offering.name}</h1>
-      <p className="mt-21 text-21 leading-34">{offering.description}</p>
+      <h1 className="text-34 mt-55 leading-34 font-bold">{offering.name}</h1>
+      <p className="text-21 mt-21 leading-34">{offering.description}</p>
       <div className="mt-55 w-full">
         <SlotPicker offeringId={offering.id} />
       </div>

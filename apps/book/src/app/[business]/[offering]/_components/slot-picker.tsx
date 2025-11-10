@@ -75,20 +75,20 @@ export default function SlotPicker({ offeringId }: SlotPickerProps) {
         weekStartsOn={1}
       />
       {selected && (
-        <div className="col-span-2 tablet:col-span-1 space-y-13 overflow-y-auto max-h-[440px]">
+        <div className="tablet:col-span-1 col-span-2 max-h-[440px] space-y-13 overflow-y-auto">
           {isPending ? (
-            <div className="h-55 flex items-center justify-center text-21">
+            <div className="text-21 flex h-55 items-center justify-center">
               Loading slots...
             </div>
           ) : slots.length === 0 ? (
-            <div className="h-55 flex items-center justify-center text-21">
+            <div className="text-21 flex h-55 items-center justify-center">
               No slots available
             </div>
           ) : (
             slots.map((slot) => (
               <div
                 key={slot.id}
-                className="h-55 border border-gray-300 flex items-center px-21"
+                className="flex h-55 items-center border border-gray-300 px-21"
               >
                 {slot.time} - {slot.duration}m
               </div>
