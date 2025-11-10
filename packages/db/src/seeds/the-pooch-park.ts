@@ -104,7 +104,7 @@ function getDates(): Date[] {
 
   const dates: Date[] = [];
   while (startDate <= endDate) {
-    dates.push(startDate);
+    dates.push(new Date(startDate));
     startDate.setDate(startDate.getDate() + 1);
   }
 
