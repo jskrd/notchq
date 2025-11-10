@@ -24,28 +24,16 @@ export async function up(db: Kysely<any>): Promise<void> {
     .execute();
 
   await db.schema
-    .createIndex("slots_date_index")
+    .createIndex("slots_offering_id_date_time_published_at_deleted_at_index")
     .on("slots")
-    .column("date")
-    .execute();
-
-  await db.schema
-    .createIndex("slots_published_at_index")
-    .on("slots")
-    .column("published_at")
-    .execute();
-
-  await db.schema
-    .createIndex("slots_deleted_at_index")
-    .on("slots")
-    .column("deleted_at")
+    .columns(["offering_id", "date", "time", "published_at", "deleted_at"])
     .execute();
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down(db: Kysely<any>): Promise<void> {
-  await db.schema.dropIndex("slots_deleted_at_index").execute();
-  await db.schema.dropIndex("slots_published_at_index").execute();
-  await db.schema.dropIndex("slots_date_index").execute();
+  await db.schema
+    .dropIndex("slots_offering_id_date_deleted_at_published_at_time_index")
+    .execute();
   await db.schema.dropTable("slots").execute();
 }
