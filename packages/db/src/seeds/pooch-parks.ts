@@ -5,8 +5,8 @@ import { createSlot } from "@repo/db/repositories/slot";
 
 export async function seed(): Promise<void> {
   const business = await createBusiness({
-    slug: "the-pooch-park",
-    name: "The Pooch Park",
+    slug: "pooch-parks",
+    name: "Pooch Parks, Denby Dale",
   });
 
   const offering1 = await createOffering({
