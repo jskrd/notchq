@@ -1,4 +1,4 @@
-import { db } from "@repo/db/database.js";
+import { db } from "@repo/db/database";
 import type {
   Basket,
   BasketAddOn,
@@ -6,7 +6,7 @@ import type {
   NewBasket,
   NewBasketAddOn,
   NewBasketSlot,
-} from "@repo/db/types.js";
+} from "@repo/db/types";
 
 export async function findBasketById(id: number): Promise<Basket | undefined> {
   return await db

@@ -2,11 +2,16 @@
   "name": "@repo/db",
   "type": "module",
   "exports": {
-    "./*": "./src/*"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
   },
   "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
     "lint": "eslint",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "kysely": "v0.28.8",

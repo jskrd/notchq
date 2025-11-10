@@ -1,5 +1,5 @@
-import { db } from "@repo/db/database.js";
-import type { NewPayment, Payment, PaymentUpdate } from "@repo/db/types.js";
+import { db } from "@repo/db/database";
+import type { NewPayment, Payment, PaymentUpdate } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findPaymentById(

@@ -1,5 +1,5 @@
-import { db } from "@repo/db/database.js";
-import type { NewSlot, Slot, SlotUpdate } from "@repo/db/types.js";
+import { db } from "@repo/db/database";
+import type { NewSlot, Slot, SlotUpdate } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findSlotById(id: number): Promise<Slot | undefined> {

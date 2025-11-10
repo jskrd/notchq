@@ -1,5 +1,5 @@
-import { db } from "@repo/db/database.js";
-import type { AddOn, AddOnUpdate, NewAddOn } from "@repo/db/types.js";
+import { db } from "@repo/db/database";
+import type { AddOn, AddOnUpdate, NewAddOn } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findAddOnById(id: number): Promise<AddOn | undefined> {

@@ -1,5 +1,5 @@
-import { db } from "@repo/db/database.js";
-import type { NewUser, User, UserUpdate } from "@repo/db/types.js";
+import { db } from "@repo/db/database";
+import type { NewUser, User, UserUpdate } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findUserById(id: number): Promise<User | undefined> {

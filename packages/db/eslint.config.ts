@@ -4,7 +4,10 @@ import tseslint from "typescript-eslint";
 
 const eslintConfig = defineConfig([
   {
-    files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+    ignores: ["dist/**"],
+  },
+  {
+    files: ["**/*.ts"],
   },
   tseslint.configs.recommended,
   eslintConfigPrettier,

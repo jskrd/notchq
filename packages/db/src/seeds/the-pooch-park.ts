@@ -1,7 +1,7 @@
-import { createAddOn } from "../repositories/add-on.js";
-import { createBusiness } from "@repo/db/repositories/business.js";
-import { createOffering } from "@repo/db/repositories/offering.js";
-import { createSlot } from "@repo/db/repositories/slot.js";
+import { createAddOn } from "@repo/db/repositories/add-on";
+import { createBusiness } from "@repo/db/repositories/business";
+import { createOffering } from "@repo/db/repositories/offering";
+import { createSlot } from "@repo/db/repositories/slot";
 
 export async function seed(): Promise<void> {
   const business = await createBusiness({
