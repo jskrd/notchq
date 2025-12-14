@@ -33,7 +33,7 @@ export async function up(db: Kysely<any>): Promise<void> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down(db: Kysely<any>): Promise<void> {
   await db.schema
-    .dropIndex("slots_offering_id_date_deleted_at_published_at_time_index")
+    .dropIndex("slots_offering_id_date_time_published_at_deleted_at_index")
     .execute();
   await db.schema.dropTable("slots").execute();
 }
