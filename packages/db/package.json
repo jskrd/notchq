@@ -14,23 +14,23 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "kysely": "v0.28.8",
-    "kysely-ctl": "v0.19.0",
-    "pg": "^8",
-    "pg-pool": "^3"
+    "kysely": "0.28.8",
+    "kysely-ctl": "0.19.0",
+    "pg": "^8.16.3",
+    "pg-pool": "^3.10.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^9",
-    "@tsconfig/node24": "^24",
-    "@tsconfig/strictest": "^2",
-    "@types/pg": "^8",
-    "@types/pg-pool": "^2",
-    "dotenv": "^17",
-    "eslint": "^9",
-    "eslint-config-prettier": "^10",
-    "tsx": "^4",
-    "typescript": "^5",
-    "typescript-eslint": "^8",
-    "zod": "^4"
+    "@faker-js/faker": "^9.9.0",
+    "@tsconfig/node24": "^24.0.3",
+    "@tsconfig/strictest": "^2.0.8",
+    "@types/pg": "^8.16.0",
+    "@types/pg-pool": "^2.0.7",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0",
+    "zod": "^4.1.13"
   }
 }
