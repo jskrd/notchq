@@ -88,14 +88,14 @@ async function seedOfferings(businesses: Business[]): Promise<Offering[]> {
     for (const floor of floors) {
       for (let roomNum = 1; roomNum <= roomsPerFloorCount; roomNum++) {
         // Distribute room types: 50% En-Suite, 30% Standard, 20% Studio
-        let roomType;
         const rand = roomNum % 10;
+        let roomType: (typeof roomTypes)[number];
         if (rand < 5) {
-          roomType = roomTypes[1]; // En-Suite
+          roomType = roomTypes[1]!; // En-Suite
         } else if (rand < 8) {
-          roomType = roomTypes[0]; // Standard
+          roomType = roomTypes[0]!; // Standard
         } else {
-          roomType = roomTypes[2]; // Studio
+          roomType = roomTypes[2]!; // Studio
         }
 
         const roomNumber = `${floor}${String(roomNum).padStart(2, "0")}`;
@@ -178,7 +178,7 @@ async function seedSlots(offerings: Offering[]): Promise<Slot[]> {
 
     // Extract room type suffix from slug (e.g., "101-e" -> "e")
     const roomTypeSuffix = offeringData.offeringSlug.split("-")[1] || "e";
-    const basePrice = roomTypePricing[roomTypeSuffix] || roomTypePricing.e;
+    const basePrice = roomTypePricing[roomTypeSuffix] ?? 9_500_00; // Default to en-suite price
     const cityMultiplier = cityMultipliers[offeringData.businessSlug] || 1.0;
 
     // Calculate final price with city multiplier
