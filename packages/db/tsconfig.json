@@ -1,16 +1,11 @@
 {
-  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node24/tsconfig"],
+  "extends": ["../../tsconfig.json"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": "./src",
     "outDir": "./dist",
+    "rootDir": "./src",
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "paths": {
-      "@repo/db/*": ["./src/*"]
-    }
+    "declarationMap": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
 }

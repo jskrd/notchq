@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "@tsconfig/strictest/tsconfig",
-    "@tsconfig/node24/tsconfig",
-    "@tsconfig/next/tsconfig"
-  ],
+  "extends": ["../../tsconfig.json", "@tsconfig/next/tsconfig.json"],
   "compilerOptions": {
     "paths": {
       "@repo/book/*": ["./src/*"]
