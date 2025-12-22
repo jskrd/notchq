@@ -143,15 +143,12 @@ export type PaymentUpdate = Updateable<PaymentTable>;
 export interface SlotTable {
   id: Generated<number>;
   offering_id: number;
-  date: Date;
-  time: string;
+  start: Date;
   duration: number;
   price: number;
   capacity: number | null;
-  published_at: Date | null;
   created_at: ColumnType<Date, string | undefined, never>;
   updated_at: ColumnType<Date, string | undefined, never>;
-  deleted_at: ColumnType<Date | null, string | undefined, never>;
 }
 export type Slot = Selectable<SlotTable>;
 export type NewSlot = Insertable<SlotTable>;

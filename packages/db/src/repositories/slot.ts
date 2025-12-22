@@ -6,7 +6,6 @@ export async function findSlotById(id: number): Promise<Slot | undefined> {
   return await db
     .selectFrom("slots")
     .where("id", "=", id)
-    .where("deleted_at", "is", null)
     .selectAll()
     .executeTakeFirst();
 }
@@ -17,7 +16,6 @@ export async function findSlotsByOfferingId(
   return await db
     .selectFrom("slots")
     .where("offering_id", "=", offeringId)
-    .where("deleted_at", "is", null)
     .selectAll()
     .execute();
 }
@@ -28,8 +26,6 @@ export async function findPublishedSlotsByOfferingId(
   return await db
     .selectFrom("slots")
     .where("offering_id", "=", offeringId)
-    .where("published_at", "is not", null)
-    .where("deleted_at", "is", null)
     .selectAll()
     .execute();
 }
@@ -53,16 +49,13 @@ export async function updateSlot(
       updated_at: sql`now()`,
     })
     .where("id", "=", id)
-    .where("deleted_at", "is", null)
     .execute();
 }
 
 export async function softDeleteSlot(id: number): Promise<Slot | undefined> {
   return await db
     .updateTable("slots")
-    .set({ deleted_at: sql`now()` })
     .where("id", "=", id)
-    .where("deleted_at", "is", null)
     .returningAll()
     .executeTakeFirst();
 }
