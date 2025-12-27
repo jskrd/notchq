@@ -2,10 +2,15 @@
 
 import { getOfferings } from "@repo/book/app/[business]/_lib/get-offerings";
 import type { Offering } from "@repo/db/types";
+import { z } from "zod";
 
-export async function loadMoreOfferings(
-  businessId: number,
-  offset: number,
-): Promise<Offering[]> {
+const schema = z.object({
+  businessId: z.number().int().positive(),
+  offset: z.number().int().positive(),
+});
+
+export async function loadMoreOfferings(data: unknown): Promise<Offering[]> {
+  const { businessId, offset } = schema.parse(data);
+
   return await getOfferings(businessId, 12, offset);
 }

@@ -28,10 +28,10 @@ export default function OfferingsInfiniteScroll({
       async (entries) => {
         if (entries[0]?.isIntersecting && hasMore && !isLoading) {
           setIsLoading(true);
-          const newOfferings = await loadMoreOfferings(
-            business.id,
-            offerings.length,
-          );
+          const newOfferings = await loadMoreOfferings({
+            businessId: business.id,
+            offset: offerings.length,
+          });
 
           if (newOfferings.length === 0) {
             setHasMore(false);
