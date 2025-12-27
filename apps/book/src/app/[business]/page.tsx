@@ -1,7 +1,7 @@
 import Container from "@repo/book/app/[business]/_components/container";
 import Offerings from "@repo/book/app/[business]/_components/offerings";
 import Skeleton from "@repo/book/app/[business]/_components/skeleton";
-import getBusiness from "@repo/book/app/[business]/_lib/get-business";
+import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
 import { slugSchema } from "@repo/book/lib/slug";
 import { notFound } from "next/navigation";
 import { Suspense, type ReactNode } from "react";

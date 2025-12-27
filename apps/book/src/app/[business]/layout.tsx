@@ -1,4 +1,4 @@
-import getBusiness from "@repo/book/app/[business]/_lib/get-business";
+import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
 import { slugSchema } from "@repo/book/lib/slug";
 import { Business } from "@repo/db/types";
 import Image from "next/image";
