@@ -1,5 +1,5 @@
+import Offerings from "./_components/offerings";
 import Container from "@repo/book/app/[business]/_components/container";
-import Offerings from "@repo/book/app/[business]/_components/offerings";
 import Skeleton from "@repo/book/app/[business]/_components/skeleton";
 import getBusiness from "@repo/book/app/[business]/_lib/get-business";
 import { notFound } from "next/navigation";
