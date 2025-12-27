@@ -10,7 +10,7 @@ config({
 });
 
 const envSchema = z.object({
-  DATABASE_URL: z.string().min(1),
+  DB_CONNECTION_STRING: z.string().min(1),
 });
 
 export const env = envSchema.parse(process.env);

@@ -5,7 +5,7 @@ import Pool from "pg-pool";
 
 const dialect = new PostgresDialect({
   pool: new Pool({
-    connectionString: env.DATABASE_URL,
+    connectionString: env.DB_CONNECTION_STRING,
   }),
 });
 
