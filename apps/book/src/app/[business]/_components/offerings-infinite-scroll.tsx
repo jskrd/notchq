@@ -2,10 +2,11 @@
 
 import { loadMoreOfferings } from "@repo/book/app/[business]/_actions/load-more-offerings";
 import Card from "@repo/book/app/[business]/_components/card";
+import Cards from "@repo/book/app/[business]/_components/cards";
 import type { Business, Offering } from "@repo/db/types";
 import { LoaderCircle } from "lucide-react";
 import type { ReactNode } from "react";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   business: Business;
@@ -54,14 +55,16 @@ export default function OfferingsInfiniteScroll({
 
   return (
     <>
-      {offerings.map((offering) => (
-        <Card key={offering.id} business={business} offering={offering} />
-      ))}
+      <Cards>
+        {offerings.map((offering) => (
+          <Card key={offering.id} business={business} offering={offering} />
+        ))}
+      </Cards>
 
       <div ref={observerTarget} className="h-1 w-full" />
 
       {isLoading && (
-        <div className="flex w-full items-center justify-center">
+        <div className="flex w-full items-center justify-center pt-55">
           <LoaderCircle className="size-34 animate-spin" />
         </div>
       )}

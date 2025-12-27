@@ -1,4 +1,3 @@
-import Container from "@repo/book/app/[business]/_components/container";
 import Offerings from "@repo/book/app/[business]/_components/offerings";
 import Skeleton from "@repo/book/app/[business]/_components/skeleton";
 import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
@@ -25,10 +24,8 @@ export default async function Page({ params }: Props): Promise<ReactNode> {
   }
 
   return (
-    <Container>
-      <Suspense fallback={<Skeleton />}>
-        <Offerings business={business} />
-      </Suspense>
-    </Container>
+    <Suspense fallback={<Skeleton />}>
+      <Offerings business={business} />
+    </Suspense>
   );
 }
