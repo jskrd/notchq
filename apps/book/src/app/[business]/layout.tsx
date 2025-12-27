@@ -1,3 +1,4 @@
+import Footer from "@repo/book/app/[business]/_components/footer";
 import Header from "@repo/book/app/[business]/_components/header";
 import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
 import { slugSchema } from "@repo/book/lib/slug";
@@ -30,6 +31,7 @@ export default async function Layout({
     <>
       <Header business={business} />
       {children}
+      <Footer />
     </>
   );
 }
