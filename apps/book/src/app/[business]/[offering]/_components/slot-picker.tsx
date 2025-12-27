@@ -1,6 +1,6 @@
 "use client";
 
-import { getSlots } from "@repo/book/app/[business]/[offering]/_lib/actions/get-slots";
+import { getSlots } from "@repo/book/app/[business]/[offering]/_actions/get-slots";
 import type { Slot } from "@repo/db/types";
 import { useState, useEffect, useTransition } from "react";
 import { DayPicker } from "react-day-picker";
@@ -11,9 +11,9 @@ type SlotPickerProps = {
 
 export default function SlotPicker({ offeringId }: SlotPickerProps) {
   const [selected, setSelected] = useState<Date | undefined>();
-  const [slots, setSlots] = useState<
-    Pick<Slot, "id" | "date" | "time" | "duration">[]
-  >([]);
+  const [slots, setSlots] = useState<Pick<Slot, "id" | "start" | "duration">[]>(
+    [],
+  );
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function SlotPicker({ offeringId }: SlotPickerProps) {
                 key={slot.id}
                 className="flex h-55 items-center border border-gray-300 px-21"
               >
-                {slot.time} - {slot.duration}m
+                {slot.start.toLocaleTimeString()} - {slot.duration}m
               </div>
             ))
           )}

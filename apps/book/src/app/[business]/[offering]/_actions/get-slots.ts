@@ -1,6 +1,6 @@
 "use server";
 
-import type { ServerActionResult } from "@repo/book/lib/types/server-action-result";
+import type { ServerActionResult } from "@repo/book/lib/server-action-result";
 import { db } from "@repo/db/database";
 import type { Slot } from "@repo/db/types";
 import { z } from "zod";
@@ -12,9 +12,7 @@ const schema = z.object({
 
 export async function getSlots(
   data: unknown,
-): Promise<
-  ServerActionResult<Pick<Slot, "id" | "date" | "time" | "duration">[]>
-> {
+): Promise<ServerActionResult<Pick<Slot, "id" | "start" | "duration">[]>> {
   const result = schema.safeParse(data);
   if (!result.success) {
     return {
@@ -24,14 +22,17 @@ export async function getSlots(
     };
   }
 
+  const startOfDay = new Date(result.data.date);
+  const endOfDay = new Date(startOfDay);
+  endOfDay.setDate(endOfDay.getDate() + 1);
+
   const results = await db
     .selectFrom("slots")
-    .select(["id", "date", "time", "duration"])
+    .select(["id", "start", "duration"])
     .where("offering_id", "=", result.data.offeringId)
-    .where("date", "=", new Date(result.data.date))
-    .where("published_at", "is not", null)
-    .where("deleted_at", "is", null)
-    .orderBy("time", "asc")
+    .where("start", ">=", startOfDay)
+    .where("start", "<", endOfDay)
+    .orderBy("start", "asc")
     .execute();
 
   return { success: true, data: results };
