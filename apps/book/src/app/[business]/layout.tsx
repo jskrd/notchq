@@ -1,21 +1,28 @@
 import getBusiness from "@repo/book/app/[business]/_lib/get-business";
+import { slugSchema } from "@repo/book/lib/slug";
 import { Business } from "@repo/db/types";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { z } from "zod";
 
 type Props = {
   children: ReactNode;
-  params: Promise<{ business: string }>;
+  params: Promise<unknown>;
 };
 
 export default async function Layout({
   children,
   params,
 }: Props): Promise<ReactNode> {
-  const { business: businessSlug } = await params;
+  const { success, data } = z
+    .object({ business: slugSchema })
+    .safeParse(await params);
+  if (!success) {
+    notFound();
+  }
 
-  const business = await getBusiness(businessSlug);
+  const business = await getBusiness(data.business);
   if (!business) {
     notFound();
   }
