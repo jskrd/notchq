@@ -5,23 +5,16 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 type Props = {
-  business?: Business;
-  offering?: Offering;
+  business: Business;
+  offering: Offering;
 };
 
 export default function Card({ business, offering }: Props): ReactNode {
-  const baseClassName =
-    "rounded-21 group relative aspect-[calc(1.618/1)] w-full overflow-hidden sm:w-[calc(50%-theme(spacing.21)/2)] lg:w-[calc(33.333%-theme(spacing.21)*2/3)]";
-
-  if (!business || !offering) {
-    return <div className={`${baseClassName} animate-pulse bg-gray-300`} />;
-  }
-
   return (
     <Link
       href={`/${business.slug}/${offering.slug}`}
       key={offering.id}
-      className={baseClassName}
+      className="rounded-21 group relative aspect-[calc(1.618/1)] w-full overflow-hidden sm:w-[calc(50%-(var(--spacing-21))/2)] lg:w-[calc(33.333%-(var(--spacing-21))*2/3)]"
     >
       <Image
         className="object-cover"

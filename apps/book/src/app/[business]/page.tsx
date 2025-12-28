@@ -1,9 +1,9 @@
-import Offerings from "@repo/book/app/[business]/_components/offerings";
-import Skeleton from "@repo/book/app/[business]/_components/skeleton";
+import OfferingsInfiniteScroll from "@repo/book/app/[business]/_components/offerings-infinite-scroll";
 import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
+import { getOfferings } from "@repo/book/app/[business]/_lib/get-offerings";
 import { slugSchema } from "@repo/book/lib/slug";
 import { notFound } from "next/navigation";
-import { Suspense, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { z } from "zod";
 
 type Props = {
@@ -23,9 +23,13 @@ export default async function Page({ params }: Props): Promise<ReactNode> {
     notFound();
   }
 
+  const initialOfferings = await getOfferings(business.id, 12, 0);
+
   return (
-    <Suspense fallback={<Skeleton />}>
-      <Offerings business={business} />
-    </Suspense>
+    <OfferingsInfiniteScroll
+      business={business}
+      initialOfferings={initialOfferings}
+      initialHasMore={initialOfferings.length === 12}
+    />
   );
 }
