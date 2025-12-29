@@ -1,6 +1,7 @@
 import SlotPicker from "@repo/book/app/[business]/[offering]/_components/slot-picker";
 import { getOffering } from "@repo/book/app/[business]/[offering]/_lib/get-offering";
 import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
+import Heading1 from "@repo/book/components/heading-1";
 import { markdownComponents } from "@repo/book/lib/markdown-components";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
@@ -25,7 +26,7 @@ export default async function Offering({ params }: Props): Promise<ReactNode> {
 
   return (
     <div className="container mx-auto px-21">
-      <h1 className="text-34 leading-34 font-bold">{offering.name}</h1>
+      <Heading1>{offering.name}</Heading1>
       <ReactMarkdown components={markdownComponents}>
         {offering.description}
       </ReactMarkdown>
