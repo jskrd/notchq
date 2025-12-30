@@ -4,6 +4,8 @@ import { db } from "@repo/db/database";
 import { Slot } from "@repo/db/types";
 import z from "zod";
 
+export type AvailableSlot = Pick<Slot, "id" | "start" | "duration">;
+
 const schema = z.object({
   offeringId: z.number().int().positive(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -11,7 +13,7 @@ const schema = z.object({
 
 export async function getAvailableSlots(
   data: unknown,
-): Promise<Pick<Slot, "id" | "start" | "duration">[]> {
+): Promise<AvailableSlot[]> {
   const { offeringId, date } = schema.parse(data);
 
   const startOfDay = new Date(date);

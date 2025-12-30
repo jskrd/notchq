@@ -1,6 +1,9 @@
 "use client";
 
-import { getAvailableSlots } from "@repo/book/app/[business]/[offering]/_actions/get-available-slots";
+import {
+  getAvailableSlots,
+  type AvailableSlot,
+} from "@repo/book/app/[business]/[offering]/_actions/get-available-slots";
 import { LoaderCircle } from "lucide-react";
 import {
   useEffect,
@@ -10,10 +13,6 @@ import {
   type ReactNode,
   type SetStateAction,
 } from "react";
-
-export type AvailableSlot = Awaited<
-  ReturnType<typeof getAvailableSlots>
->[number];
 
 type Props = {
   offeringId: number;
