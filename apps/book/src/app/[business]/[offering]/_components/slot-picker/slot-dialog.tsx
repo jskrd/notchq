@@ -30,13 +30,17 @@ export default function SlotDialog({
   const [isFetching, startTransition] = useTransition();
 
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
     startTransition(() => {
       (async () => {
         const slot = await getSlot({ id: selectedSlot.id });
         setSlot(slot);
       })();
     });
-  }, [selectedSlot]);
+  }, [isOpen, selectedSlot]);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
