@@ -1,3 +1,4 @@
+import { cn } from "@repo/book/lib/cn";
 import type { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
 type Props = DetailedHTMLProps<
@@ -7,7 +8,7 @@ type Props = DetailedHTMLProps<
 
 export default function Paragraph({ children, ...props }: Props): ReactNode {
   return (
-    <p className="text-21 mt-21 leading-34" {...props}>
+    <p {...props} className={cn("text-21 mt-21 leading-34", props.className)}>
       {children}
     </p>
   );
