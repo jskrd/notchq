@@ -51,7 +51,7 @@ export default function OfferingsInfiniteScroll({
     }
 
     return () => observer.disconnect();
-  }, [business.id, offerings.length]);
+  }, [business.id, offerings.length, hasMore, isLoading]);
 
   return (
     <>
