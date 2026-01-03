@@ -1,6 +1,6 @@
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
-import { defineConfig } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import { dirname } from "path";
 import tseslint from "typescript-eslint";
 import { fileURLToPath } from "url";
@@ -12,11 +12,11 @@ export default defineConfig([
   tseslint.configs.recommended,
   eslintConfigPrettier,
   {
-    ignores: ["**/dist/**", "**/node_modules/**"],
     languageOptions: {
       parserOptions: {
         tsconfigRootDir: __dirname,
       },
     },
   },
+  globalIgnores(["dist/**"]),
 ]);

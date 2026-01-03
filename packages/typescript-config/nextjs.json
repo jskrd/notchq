@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "@repo/typescript-config/common.json",
+    "@tsconfig/next/tsconfig.json"
+  ]
+}

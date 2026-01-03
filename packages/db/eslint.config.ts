@@ -1,12 +1,4 @@
-import baseConfig from "../../eslint.config.js";
+import commonConfig from "@repo/eslint-config/common";
 import { defineConfig } from "eslint/config";
 
-export default defineConfig([
-  baseConfig,
-  {
-    ignores: ["dist/**"],
-  },
-  {
-    files: ["**/*.ts"],
-  },
-]);
+export default defineConfig([commonConfig]);
