@@ -10,7 +10,7 @@ export default function Heading2({ children, ...props }: Props): ReactNode {
   return (
     <h2
       {...props}
-      className={cn("text-21 leading-21 font-bold", props.className)}
+      className={cn("text-21 leading-34 font-bold", props.className)}
     >
       {children}
     </h2>

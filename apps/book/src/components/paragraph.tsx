@@ -8,7 +8,7 @@ type Props = DetailedHTMLProps<
 
 export default function Paragraph({ children, ...props }: Props): ReactNode {
   return (
-    <p {...props} className={cn("text-21 mt-21 leading-34", props.className)}>
+    <p {...props} className={cn("text-13! mt-13 leading-21", props.className)}>
       {children}
     </p>
   );
