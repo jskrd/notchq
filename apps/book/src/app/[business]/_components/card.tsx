@@ -12,6 +12,11 @@ type Props = {
 };
 
 export default function Card({ business, offering }: Props): ReactNode {
+  const truncatedDescription =
+    offering.description.length > 200
+      ? offering.description.slice(0, 200)
+      : offering.description;
+
   return (
     <Link
       href={`/${business.slug}/${offering.slug}`}
@@ -47,7 +52,7 @@ export default function Card({ business, offering }: Props): ReactNode {
             {offering.name}
           </Heading2>
           <Paragraph className="line-clamp-2 text-white text-shadow-md">
-            {offering.description}
+            {truncatedDescription}
           </Paragraph>
         </div>
       </div>
