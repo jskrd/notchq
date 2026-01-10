@@ -11,6 +11,8 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("slug", "text", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
     .addColumn("description", "text", (col) => col.notNull())
+    .addColumn("image_url", "text")
+    .addColumn("image_accent_color", "text")
     .addColumn("timezone", "text", (col) => col.notNull())
     .addColumn("currency", "text", (col) => col.notNull())
     .addColumn("add_on_min_selections", "integer", (col) =>

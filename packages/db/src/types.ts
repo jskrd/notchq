@@ -112,6 +112,8 @@ export interface OfferingTable {
   slug: string;
   name: string;
   description: string;
+  image_url: string | null;
+  image_accent_color: string | null;
   timezone: string;
   currency: string;
   add_on_min_selections: ColumnType<number, number | undefined, number>;
