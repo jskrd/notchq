@@ -60,6 +60,7 @@ export default function InfiniteScroll({
             key={offering.slug}
             linkUrl={`/${business.slug}/${offering.slug}`}
             imageUrl={offering.image_url}
+            tagline="Now Available"
             heading={offering.name}
             description={offering.description}
             accentColor={offering.accent_color}

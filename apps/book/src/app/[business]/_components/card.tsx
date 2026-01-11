@@ -8,6 +8,7 @@ import type { ReactNode } from "react";
 export type CardProps = {
   linkUrl: string;
   imageUrl: string | null;
+  tagline: string | null;
   heading: string | null;
   description: string | null;
   accentColor: string | null;
@@ -16,6 +17,7 @@ export type CardProps = {
 export default function Card({
   linkUrl,
   imageUrl,
+  tagline,
   heading,
   description,
   accentColor,
@@ -41,19 +43,33 @@ export default function Card({
       )}
 
       <div
-        className="absolute inset-0 flex items-end justify-start"
+        className={
+          "absolute inset-0 flex flex-col items-start " +
+          (tagline ? "justify-between" : "justify-end")
+        }
         style={{
           backgroundImage: `linear-gradient(to bottom, transparent 50%, ${accentColor})`,
         }}
       >
-        <div className="p-13">
+        {tagline && (
+          <div
+            className="text-13 rounded-br-21 px-13 py-3 font-semibold tracking-wide text-white uppercase"
+            style={{
+              backgroundColor: accentColor,
+            }}
+          >
+            {tagline}
+          </div>
+        )}
+
+        <div className="flex w-full flex-col gap-8 p-13 *:my-0">
           {heading && (
             <Heading2 className="text-34! font-bold text-white text-shadow-lg">
               {heading}
             </Heading2>
           )}
           {description && (
-            <Paragraph className="line-clamp-2 text-white text-shadow-md">
+            <Paragraph className="line-clamp-2 text-white opacity-90 text-shadow-md">
               {description.slice(0, 128)}
             </Paragraph>
           )}
