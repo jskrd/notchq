@@ -54,7 +54,7 @@ export default function Card({
           )}
           {description && (
             <Paragraph className="line-clamp-2 text-white text-shadow-md">
-              {description.slice(0, 128) + "..."}
+              {description.slice(0, 128)}
             </Paragraph>
           )}
         </div>
