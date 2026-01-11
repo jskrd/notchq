@@ -1,4 +1,4 @@
-import OfferingsInfiniteScroll from "@repo/book/app/[business]/_components/offerings-infinite-scroll";
+import InfiniteScroll from "@repo/book/app/[business]/_components/infinite-scroll";
 import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
 import { getOfferings } from "@repo/book/app/[business]/_lib/get-offerings";
 import { slugSchema } from "@repo/book/lib/slug";
@@ -26,7 +26,7 @@ export default async function Page({ params }: Props): Promise<ReactNode> {
   const initialOfferings = await getOfferings(business.id, 12, 0);
 
   return (
-    <OfferingsInfiniteScroll
+    <InfiniteScroll
       business={business}
       initialOfferings={initialOfferings}
       initialHasMore={initialOfferings.length === 12}

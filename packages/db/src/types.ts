@@ -8,6 +8,8 @@ import type {
 
 export interface Database {
   add_ons: AddOnTable;
+  availability_overrides: AvailabilityOverrideTable;
+  availability_rules: AvailabilityRuleTable;
   basket_add_ons: BasketAddOnTable;
   basket_slots: BasketSlotTable;
   baskets: BasketTable;
@@ -35,6 +37,47 @@ export interface AddOnTable {
 export type AddOn = Selectable<AddOnTable>;
 export type NewAddOn = Insertable<AddOnTable>;
 export type AddOnUpdate = Updateable<AddOnTable>;
+
+export interface AvailabilityOverrideTable {
+  id: Generated<number>;
+  offering_id: number;
+  name: string;
+  date: ColumnType<Date, string | undefined, never>;
+  start_time: string | null;
+  end_time: string | null;
+  action: "close" | "open" | "adjust";
+  capacity_override: number | null;
+  price_override: number | null;
+  created_at: ColumnType<Date, string | undefined, never>;
+  updated_at: ColumnType<Date, string | undefined, never>;
+}
+export type AvailabilityOverride = Selectable<AvailabilityOverrideTable>;
+export type NewAvailabilityOverride = Insertable<AvailabilityOverrideTable>;
+export type AvailabilityOverrideUpdate = Updateable<AvailabilityOverrideTable>;
+
+export interface AvailabilityRuleTable {
+  id: Generated<number>;
+  offering_id: number;
+  start: Date;
+  frequency:
+    | "yearly"
+    | "monthly"
+    | "weekly"
+    | "daily"
+    | "hourly"
+    | "minutely"
+    | "secondly";
+  interval: number;
+  capacity: number;
+  price: number;
+  starts_on: ColumnType<Date | null, string | undefined, never>;
+  ends_on: ColumnType<Date | null, string | undefined, never>;
+  created_at: ColumnType<Date, string | undefined, never>;
+  updated_at: ColumnType<Date, string | undefined, never>;
+}
+export type AvailabilityRule = Selectable<AvailabilityRuleTable>;
+export type NewAvailabilityRule = Insertable<AvailabilityRuleTable>;
+export type AvailabilityRuleUpdate = Updateable<AvailabilityRuleTable>;
 
 export interface BasketTable {
   id: Generated<number>;
@@ -113,7 +156,7 @@ export interface OfferingTable {
   name: string;
   description: string;
   image_url: string | null;
-  image_accent_color: string | null;
+  accent_color: string | null;
   timezone: string;
   currency: string;
   add_on_min_selections: ColumnType<number, number | undefined, number>;

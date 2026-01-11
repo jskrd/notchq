@@ -1,6 +1,5 @@
 import Footer from "@repo/book/app/[business]/_components/footer";
 import Header from "@repo/book/app/[business]/_components/header";
-import Main from "@repo/book/app/[business]/_components/main";
 import { getBusiness } from "@repo/book/app/[business]/_lib/get-business";
 import { slugSchema } from "@repo/book/lib/slug";
 import { notFound } from "next/navigation";
@@ -31,7 +30,7 @@ export default async function Layout({
   return (
     <>
       <Header business={business} />
-      <Main>{children}</Main>
+      <main className="container mx-auto">{children}</main>
       <Footer />
     </>
   );

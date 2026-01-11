@@ -30,7 +30,7 @@ export async function getOfferings(
   await Promise.all(
     offerings.map(async (offering) => {
       offering.image_url = `https://picsum.photos/seed/${offering.id}/1024/1024`;
-      offering.image_accent_color = offering.image_url
+      offering.accent_color = offering.image_url
         ? await getCachedImageAccentColor(offering.image_url)
         : null;
     }),

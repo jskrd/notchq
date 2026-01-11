@@ -2,7 +2,6 @@
 
 import { loadMoreOfferings } from "@repo/book/app/[business]/_actions/load-more-offerings";
 import Card from "@repo/book/app/[business]/_components/card";
-import Cards from "@repo/book/app/[business]/_components/cards";
 import type { Business, Offering } from "@repo/db/types";
 import { LoaderCircle } from "lucide-react";
 import type { ReactNode } from "react";
@@ -14,7 +13,7 @@ type Props = {
   initialHasMore: boolean;
 };
 
-export default function OfferingsInfiniteScroll({
+export default function InfiniteScroll({
   business,
   initialOfferings,
   initialHasMore,
@@ -55,11 +54,18 @@ export default function OfferingsInfiniteScroll({
 
   return (
     <>
-      <Cards>
+      <div className="flex flex-wrap justify-center gap-21 px-21">
         {offerings.map((offering) => (
-          <Card key={offering.id} business={business} offering={offering} />
+          <Card
+            key={offering.slug}
+            linkUrl={`/${business.slug}/${offering.slug}`}
+            imageUrl={offering.image_url}
+            heading={offering.name}
+            description={offering.description}
+            accentColor={offering.accent_color}
+          />
         ))}
-      </Cards>
+      </div>
 
       <div ref={observerTarget} className="h-1 w-full" />
 
