@@ -27,7 +27,7 @@ export default function Card({
   return (
     <Link
       href={linkUrl}
-      className="rounded-21 group relative aspect-square w-full overflow-hidden shadow-lg transition-all duration-50 ease-in-out hover:scale-[1.02] hover:shadow-2xl sm:w-[calc(50%-(var(--spacing-21))/2)] lg:w-[calc(33.333%-(var(--spacing-21))*2/3)]"
+      className="rounded-21 group relative aspect-square w-full overflow-hidden sm:w-[calc(50%-(var(--spacing-21))/2)] lg:w-[calc(33.333%-(var(--spacing-21))*2/3)]"
       style={{
         border: `5px solid ${accentColor}`,
       }}
@@ -64,7 +64,7 @@ export default function Card({
 
         <div className="flex w-full flex-col gap-8 p-13 *:my-0">
           {heading && (
-            <Heading2 className="text-34! font-bold text-white text-shadow-lg">
+            <Heading2 className="text-34! font-bold text-white text-shadow-lg group-hover:underline">
               {heading}
             </Heading2>
           )}
