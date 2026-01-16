@@ -69,7 +69,7 @@ export default function Card({
             </Heading2>
           )}
           {description && (
-            <Paragraph className="line-clamp-2 text-white opacity-90 text-shadow-md">
+            <Paragraph className="line-clamp-2 text-white text-shadow-md/10">
               {description.slice(0, 128)}
             </Paragraph>
           )}
