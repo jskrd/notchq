@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@repo/db/database";
+import { getDb } from "@repo/db/database";
 import { Slot } from "@repo/db/types";
 import z from "zod";
 
@@ -11,7 +11,7 @@ const schema = z.object({
 export async function getSlot(data: unknown): Promise<Slot | null> {
   const { id } = schema.parse(data);
 
-  const slot = await db
+  const slot = await getDb()
     .selectFrom("slots")
     .selectAll()
     .where("id", "=", id)

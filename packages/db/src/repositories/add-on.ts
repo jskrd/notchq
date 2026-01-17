@@ -1,9 +1,9 @@
-import { db } from "@repo/db/database";
+import { getDb } from "@repo/db/database";
 import type { AddOn, AddOnUpdate, NewAddOn } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findAddOnById(id: number): Promise<AddOn | undefined> {
-  return await db
+  return await getDb()
     .selectFrom("add_ons")
     .where("id", "=", id)
     .where("deleted_at", "is", null)
@@ -14,7 +14,7 @@ export async function findAddOnById(id: number): Promise<AddOn | undefined> {
 export async function findAddOnsByOfferingId(
   offeringId: number,
 ): Promise<AddOn[]> {
-  return await db
+  return await getDb()
     .selectFrom("add_ons")
     .where("offering_id", "=", offeringId)
     .where("deleted_at", "is", null)
@@ -25,7 +25,7 @@ export async function findAddOnsByOfferingId(
 export async function findPublishedAddOnsByOfferingId(
   offeringId: number,
 ): Promise<AddOn[]> {
-  return await db
+  return await getDb()
     .selectFrom("add_ons")
     .where("offering_id", "=", offeringId)
     .where("published_at", "is not", null)
@@ -35,7 +35,7 @@ export async function findPublishedAddOnsByOfferingId(
 }
 
 export async function createAddOn(addOn: NewAddOn): Promise<AddOn> {
-  return await db
+  return await getDb()
     .insertInto("add_ons")
     .values(addOn)
     .returningAll()
@@ -46,7 +46,7 @@ export async function updateAddOn(
   id: number,
   updateWith: AddOnUpdate,
 ): Promise<void> {
-  await db
+  await getDb()
     .updateTable("add_ons")
     .set({
       ...updateWith,
@@ -58,7 +58,7 @@ export async function updateAddOn(
 }
 
 export async function softDeleteAddOn(id: number): Promise<AddOn | undefined> {
-  return await db
+  return await getDb()
     .updateTable("add_ons")
     .set({ deleted_at: sql`now()` })
     .where("id", "=", id)

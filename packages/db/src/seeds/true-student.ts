@@ -1,4 +1,4 @@
-import { db } from "@repo/db/database";
+import { getDb } from "@repo/db/database";
 import type {
   Business,
   NewOffering,
@@ -15,7 +15,7 @@ export async function seed(): Promise<void> {
 }
 
 async function seedBusinesses(): Promise<Business[]> {
-  return await db
+  return await getDb()
     .insertInto("businesses")
     .values([
       {
@@ -113,7 +113,7 @@ async function seedOfferings(businesses: Business[]): Promise<Offering[]> {
     }
   }
 
-  return await db
+  return await getDb()
     .insertInto("offerings")
     .values(newOfferings)
     .returningAll()
@@ -155,7 +155,7 @@ async function seedSlots(offerings: Offering[]): Promise<Slot[]> {
   const newSlots: NewSlot[] = [];
 
   // First, get all offerings with their business info
-  const offeringsWithBusiness = await db
+  const offeringsWithBusiness = await getDb()
     .selectFrom("offerings")
     .innerJoin("businesses", "offerings.business_id", "businesses.id")
     .select([
@@ -195,5 +195,9 @@ async function seedSlots(offerings: Offering[]): Promise<Slot[]> {
     }
   }
 
-  return await db.insertInto("slots").values(newSlots).returningAll().execute();
+  return await getDb()
+    .insertInto("slots")
+    .values(newSlots)
+    .returningAll()
+    .execute();
 }

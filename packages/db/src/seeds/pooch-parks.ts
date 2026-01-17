@@ -1,4 +1,4 @@
-import { db } from "@repo/db/database";
+import { getDb } from "@repo/db/database";
 import type {
   AddOn,
   Business,
@@ -17,7 +17,7 @@ export async function seed(): Promise<void> {
 }
 
 async function seedBusiness(): Promise<Business> {
-  return await db
+  return await getDb()
     .insertInto("businesses")
     .values({
       slug: "pooch-parks",
@@ -28,7 +28,7 @@ async function seedBusiness(): Promise<Business> {
 }
 
 async function seedOfferings(business: Business): Promise<Offering[]> {
-  return await db
+  return await getDb()
     .insertInto("offerings")
     .values([
       {
@@ -98,7 +98,7 @@ async function seedAddOns(offerings: Offering[]): Promise<AddOn[]> {
     });
   }
 
-  return await db
+  return await getDb()
     .insertInto("add_ons")
     .values(newAddOns)
     .returningAll()
@@ -152,5 +152,9 @@ async function seedSlots(offerings: Offering[]): Promise<Slot[]> {
     }
   }
 
-  return await db.insertInto("slots").values(newSlots).returningAll().execute();
+  return await getDb()
+    .insertInto("slots")
+    .values(newSlots)
+    .returningAll()
+    .execute();
 }

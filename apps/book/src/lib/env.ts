@@ -5,4 +5,13 @@ export const envSchema = z.object({
   WWW_URL: z.url({ protocol: /^https$/ }),
 });
 
-export const env = envSchema.parse(process.env);
+type Env = z.infer<typeof envSchema>;
+
+let _env: Env | null = null;
+
+export function getEnv(): Env {
+  if (!_env) {
+    _env = envSchema.parse(process.env);
+  }
+  return _env;
+}
