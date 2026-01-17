@@ -37,7 +37,10 @@ export async function extractImageColorAccent(url: string): Promise<string> {
 
     // Run k-means iterations
     for (let iter = 0; iter < 10; iter++) {
-      const assignments: number[][] = Array.from({ length: clusterCount }, () => []);
+      const assignments: number[][] = Array.from(
+        { length: clusterCount },
+        () => [],
+      );
 
       // Assign pixels to nearest cluster
       for (let i = 0; i < pixels.length; i++) {
