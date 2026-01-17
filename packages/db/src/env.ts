@@ -10,7 +10,11 @@ config({
 });
 
 const envSchema = z.object({
-  DB_CONNECTION_STRING: z.string().min(1),
+  DB_HOST: z.string().min(1),
+  DB_PORT: z.coerce.number().min(1).max(65535),
+  DB_DATABASE: z.string().min(1),
+  DB_USER: z.string().min(1),
+  DB_PASSWORD: z.string().min(1),
 });
 
 export const env = envSchema.parse(process.env);
