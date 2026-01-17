@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsup src/index.ts --format esm --clean",
     "lint": "eslint",
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit"
@@ -13,5 +13,8 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "hono": "^4.11.3"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
   }
 }
