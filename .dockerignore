@@ -1,0 +1,6 @@
+**/*.test.ts
+**/.next
+**/.turbo
+**/dist
+**/node_modules
+.git
