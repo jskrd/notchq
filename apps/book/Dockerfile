@@ -4,6 +4,7 @@ WORKDIR /app
 FROM base AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY . .
+RUN npm install --global --force corepack
 RUN corepack enable pnpm
 RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @repo/book run build

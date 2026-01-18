@@ -1,8 +1,9 @@
 FROM node:25-alpine
 WORKDIR /app
+RUN npm install --global --force corepack
+RUN corepack enable pnpm
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 hono
-RUN corepack enable pnpm
 RUN chown hono:nodejs /app
 COPY --chown=hono:nodejs . .
 USER hono
