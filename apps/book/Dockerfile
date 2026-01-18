@@ -6,7 +6,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 COPY . .
 RUN corepack enable pnpm
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @repo/book... run build
+RUN pnpm --filter @repo/book run build
 
 FROM base
 ENV PORT=3000

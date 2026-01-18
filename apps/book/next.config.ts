@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
     ],
   },
   output: "standalone",
+  transpilePackages: ["@repo/db", "@repo/slots"],
 };
 
 export default nextConfig;

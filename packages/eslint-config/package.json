@@ -2,16 +2,11 @@
   "name": "@repo/eslint-config",
   "type": "module",
   "exports": {
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
-    }
+    "./*": "./src/*.ts"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc"
   },
   "devDependencies": {
     "@eslint/js": "9.39.2",

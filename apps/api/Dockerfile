@@ -5,7 +5,7 @@ FROM base AS build
 COPY . .
 RUN corepack enable pnpm
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @repo/api... run build
+RUN pnpm --filter @repo/api run build
 
 FROM base
 RUN addgroup --system --gid 1001 nodejs

@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsup src/index.ts --format esm --clean",
+    "build": "tsup",
     "lint": "eslint",
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit"
