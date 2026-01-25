@@ -1,10 +1,23 @@
 "use server";
 
-import { db } from "@repo/db/database";
-import { Slot } from "@repo/db/types";
+import { env } from "@repo/book/lib/env";
 import z from "zod";
 
-export type AvailableSlot = Pick<Slot, "id" | "start" | "duration">;
+export interface AvailableSlot {
+  id: number;
+  start: Date;
+  duration: number;
+}
+
+interface ApiSlot {
+  id: number;
+  offering_id: number;
+  start: string;
+  duration: number;
+  price: number;
+  capacity: number | null;
+  created_at: string;
+}
 
 const schema = z.object({
   offeringId: z.number().int().positive(),
@@ -16,18 +29,19 @@ export async function getAvailableSlots(
 ): Promise<AvailableSlot[]> {
   const { offeringId, date } = schema.parse(data);
 
-  const startOfDay = new Date(date);
-  const endOfDay = new Date(startOfDay);
-  endOfDay.setDate(endOfDay.getDate() + 1);
+  const response = await fetch(
+    `${env().API_URL}/v1/offerings/${offeringId}/slots?date=${date}`,
+  );
 
-  const slots = await db()
-    .selectFrom("slots")
-    .select(["id", "start", "duration"])
-    .where("offering_id", "=", offeringId)
-    .where("start", ">=", startOfDay)
-    .where("start", "<", endOfDay)
-    .orderBy("start", "asc")
-    .execute();
+  if (!response.ok) {
+    return [];
+  }
 
-  return slots;
+  const json = (await response.json()) as { data: ApiSlot[] };
+
+  return json.data.map((slot) => ({
+    id: slot.id,
+    start: new Date(slot.start),
+    duration: slot.duration,
+  }));
 }

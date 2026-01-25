@@ -2,7 +2,8 @@
 
 import { loadMoreOfferings } from "@repo/book/app/[business]/_actions/load-more-offerings";
 import Card from "@repo/book/app/[business]/_components/card";
-import type { Business, Offering } from "@repo/db/types";
+import type { Business } from "@repo/book/app/[business]/_lib/get-business";
+import type { Offering } from "@repo/book/app/[business]/_lib/get-offerings";
 import { LoaderCircle } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";

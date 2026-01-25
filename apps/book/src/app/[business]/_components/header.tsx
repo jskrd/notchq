@@ -1,4 +1,4 @@
-import type { Business } from "@repo/db/types";
+import type { Business } from "@repo/book/app/[business]/_lib/get-business";
 import Image from "next/image";
 import type { ReactNode } from "react";
 

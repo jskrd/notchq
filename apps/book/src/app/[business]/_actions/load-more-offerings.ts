@@ -1,7 +1,9 @@
 "use server";
 
-import { getOfferings } from "@repo/book/app/[business]/_lib/get-offerings";
-import type { Offering } from "@repo/db/types";
+import {
+  getOfferings,
+  type Offering,
+} from "@repo/book/app/[business]/_lib/get-offerings";
 import { z } from "zod";
 
 const schema = z.object({

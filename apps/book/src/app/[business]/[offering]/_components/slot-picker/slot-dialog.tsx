@@ -1,5 +1,8 @@
 import { AvailableSlot } from "@repo/book/app/[business]/[offering]/_actions/get-available-slots";
-import { getSlot } from "@repo/book/app/[business]/[offering]/_actions/get-slot";
+import {
+  getSlot,
+  type Slot,
+} from "@repo/book/app/[business]/[offering]/_actions/get-slot";
 import { dateString } from "@repo/book/app/[business]/[offering]/_lib/date-string";
 import { timeDurationString } from "@repo/book/app/[business]/[offering]/_lib/time-duration-string";
 import { timeRangeString } from "@repo/book/app/[business]/[offering]/_lib/time-range-string";
@@ -11,7 +14,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@repo/book/components/dialog";
-import { Slot } from "@repo/db/types";
 import { useEffect, useState, type ReactNode } from "react";
 import { useTransition } from "react";
 

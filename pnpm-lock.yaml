@@ -60,9 +60,6 @@ importers:
 
   apps/book:
     dependencies:
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../../packages/db
       lucide-react:
         specifier: ^0.562.0
         version: 0.562.0(react@19.2.3)
