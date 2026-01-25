@@ -1,9 +1,9 @@
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import type { NewUser, User, UserUpdate } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findUserById(id: number): Promise<User | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("users")
     .where("id", "=", id)
     .selectAll()
@@ -13,7 +13,7 @@ export async function findUserById(id: number): Promise<User | undefined> {
 export async function findUserByEmail(
   email: string,
 ): Promise<User | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("users")
     .where("email", "=", email)
     .selectAll()
@@ -21,7 +21,7 @@ export async function findUserByEmail(
 }
 
 export async function createUser(user: NewUser): Promise<User> {
-  return await getDb()
+  return await db()
     .insertInto("users")
     .values(user)
     .returningAll()
@@ -32,7 +32,7 @@ export async function updateUser(
   id: number,
   updateWith: UserUpdate,
 ): Promise<void> {
-  await getDb()
+  await db()
     .updateTable("users")
     .set({
       ...updateWith,
@@ -43,7 +43,7 @@ export async function updateUser(
 }
 
 export async function deleteUser(id: number): Promise<User | undefined> {
-  return await getDb()
+  return await db()
     .deleteFrom("users")
     .where("id", "=", id)
     .returningAll()

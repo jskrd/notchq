@@ -1,6 +1,6 @@
 "use server";
 
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import { Slot } from "@repo/db/types";
 import z from "zod";
 
@@ -20,7 +20,7 @@ export async function getAvailableSlots(
   const endOfDay = new Date(startOfDay);
   endOfDay.setDate(endOfDay.getDate() + 1);
 
-  const slots = await getDb()
+  const slots = await db()
     .selectFrom("slots")
     .select(["id", "start", "duration"])
     .where("offering_id", "=", offeringId)

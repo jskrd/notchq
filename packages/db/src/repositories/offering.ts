@@ -1,11 +1,11 @@
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import type { NewOffering, Offering, OfferingUpdate } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findOfferingById(
   id: number,
 ): Promise<Offering | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("offerings")
     .where("id", "=", id)
     .where("deleted_at", "is", null)
@@ -17,7 +17,7 @@ export async function findOfferingBySlug(
   businessId: number,
   slug: string,
 ): Promise<Offering | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("offerings")
     .where("business_id", "=", businessId)
     .where("slug", "=", slug)
@@ -29,7 +29,7 @@ export async function findOfferingBySlug(
 export async function findOfferingsByBusinessId(
   businessId: number,
 ): Promise<Offering[]> {
-  return await getDb()
+  return await db()
     .selectFrom("offerings")
     .where("business_id", "=", businessId)
     .where("deleted_at", "is", null)
@@ -38,7 +38,7 @@ export async function findOfferingsByBusinessId(
 }
 
 export async function createOffering(offering: NewOffering): Promise<Offering> {
-  return await getDb()
+  return await db()
     .insertInto("offerings")
     .values(offering)
     .returningAll()
@@ -49,7 +49,7 @@ export async function updateOffering(
   id: number,
   updateWith: OfferingUpdate,
 ): Promise<void> {
-  await getDb()
+  await db()
     .updateTable("offerings")
     .set({
       ...updateWith,
@@ -63,7 +63,7 @@ export async function updateOffering(
 export async function softDeleteOffering(
   id: number,
 ): Promise<Offering | undefined> {
-  return await getDb()
+  return await db()
     .updateTable("offerings")
     .set({ deleted_at: sql`now()` })
     .where("id", "=", id)

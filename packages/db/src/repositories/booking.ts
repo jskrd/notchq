@@ -1,11 +1,11 @@
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import type { Booking, BookingUpdate, NewBooking } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findBookingById(
   id: number,
 ): Promise<Booking | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("bookings")
     .where("id", "=", id)
     .selectAll()
@@ -15,7 +15,7 @@ export async function findBookingById(
 export async function findBookingByReference(
   reference: string,
 ): Promise<Booking | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("bookings")
     .where("reference", "=", reference)
     .selectAll()
@@ -23,7 +23,7 @@ export async function findBookingByReference(
 }
 
 export async function findBookingsByUserId(userId: number): Promise<Booking[]> {
-  return await getDb()
+  return await db()
     .selectFrom("bookings")
     .where("user_id", "=", userId)
     .selectAll()
@@ -31,7 +31,7 @@ export async function findBookingsByUserId(userId: number): Promise<Booking[]> {
 }
 
 export async function findBookingsByEmail(email: string): Promise<Booking[]> {
-  return await getDb()
+  return await db()
     .selectFrom("bookings")
     .where("customer_email", "=", email)
     .selectAll()
@@ -39,7 +39,7 @@ export async function findBookingsByEmail(email: string): Promise<Booking[]> {
 }
 
 export async function createBooking(booking: NewBooking): Promise<Booking> {
-  return await getDb()
+  return await db()
     .insertInto("bookings")
     .values(booking)
     .returningAll()
@@ -50,7 +50,7 @@ export async function updateBooking(
   id: number,
   updateWith: BookingUpdate,
 ): Promise<void> {
-  await getDb()
+  await db()
     .updateTable("bookings")
     .set({
       ...updateWith,

@@ -1,5 +1,5 @@
 import { extractImageColorAccent } from "@repo/book/lib/extract-image-accent-color";
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import { Offering } from "@repo/db/types";
 import { unstable_cache } from "next/cache";
 
@@ -17,7 +17,7 @@ export async function getOfferings(
   limit: number,
   offset: number,
 ): Promise<Offering[]> {
-  const offerings = await getDb()
+  const offerings = await db()
     .selectFrom("offerings")
     .where("business_id", "=", businessId)
     .where("deleted_at", "is", null)

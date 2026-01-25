@@ -1,11 +1,11 @@
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import type { Business, BusinessUpdate, NewBusiness } from "@repo/db/types";
 import { sql } from "kysely";
 
 export async function findBusinessById(
   id: number,
 ): Promise<Business | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("businesses")
     .where("id", "=", id)
     .selectAll()
@@ -15,7 +15,7 @@ export async function findBusinessById(
 export async function findBusinessBySlug(
   slug: string,
 ): Promise<Business | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("businesses")
     .where("slug", "=", slug)
     .selectAll()
@@ -25,7 +25,7 @@ export async function findBusinessBySlug(
 export async function findBusinessesByUserId(
   userId: number,
 ): Promise<Business[]> {
-  return await getDb()
+  return await db()
     .selectFrom("businesses")
     .innerJoin("business_users", "business_users.business_id", "businesses.id")
     .where("business_users.user_id", "=", userId)
@@ -34,7 +34,7 @@ export async function findBusinessesByUserId(
 }
 
 export async function createBusiness(business: NewBusiness): Promise<Business> {
-  return await getDb()
+  return await db()
     .insertInto("businesses")
     .values(business)
     .returningAll()
@@ -45,7 +45,7 @@ export async function updateBusiness(
   id: number,
   updateWith: BusinessUpdate,
 ): Promise<void> {
-  await getDb()
+  await db()
     .updateTable("businesses")
     .set({
       ...updateWith,
@@ -58,7 +58,7 @@ export async function updateBusiness(
 export async function deleteBusiness(
   id: number,
 ): Promise<Business | undefined> {
-  return await getDb()
+  return await db()
     .deleteFrom("businesses")
     .where("id", "=", id)
     .returningAll()

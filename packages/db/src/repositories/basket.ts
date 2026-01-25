@@ -1,4 +1,4 @@
-import { getDb } from "@repo/db/database";
+import { db } from "@repo/db/database";
 import type {
   Basket,
   BasketAddOn,
@@ -9,7 +9,7 @@ import type {
 } from "@repo/db/types";
 
 export async function findBasketById(id: number): Promise<Basket | undefined> {
-  return await getDb()
+  return await db()
     .selectFrom("baskets")
     .where("id", "=", id)
     .selectAll()
@@ -31,7 +31,7 @@ export async function findBasketWithItems(
 }
 
 export async function findBasketSlots(basketId: number): Promise<BasketSlot[]> {
-  return await getDb()
+  return await db()
     .selectFrom("basket_slots")
     .where("basket_id", "=", basketId)
     .selectAll()
@@ -41,7 +41,7 @@ export async function findBasketSlots(basketId: number): Promise<BasketSlot[]> {
 export async function findBasketAddOns(
   basketId: number,
 ): Promise<BasketAddOn[]> {
-  return await getDb()
+  return await db()
     .selectFrom("basket_add_ons")
     .where("basket_id", "=", basketId)
     .selectAll()
@@ -49,7 +49,7 @@ export async function findBasketAddOns(
 }
 
 export async function createBasket(basket: NewBasket): Promise<Basket> {
-  return await getDb()
+  return await db()
     .insertInto("baskets")
     .values(basket)
     .returningAll()
@@ -59,7 +59,7 @@ export async function createBasket(basket: NewBasket): Promise<Basket> {
 export async function addSlotToBasket(
   basketSlot: NewBasketSlot,
 ): Promise<BasketSlot> {
-  return await getDb()
+  return await db()
     .insertInto("basket_slots")
     .values(basketSlot)
     .returningAll()
@@ -69,7 +69,7 @@ export async function addSlotToBasket(
 export async function addAddOnToBasket(
   basketAddOn: NewBasketAddOn,
 ): Promise<BasketAddOn> {
-  return await getDb()
+  return await db()
     .insertInto("basket_add_ons")
     .values(basketAddOn)
     .returningAll()
@@ -80,7 +80,7 @@ export async function removeSlotFromBasket(
   basketId: number,
   slotId: number,
 ): Promise<BasketSlot | undefined> {
-  return await getDb()
+  return await db()
     .deleteFrom("basket_slots")
     .where("basket_id", "=", basketId)
     .where("slot_id", "=", slotId)
@@ -92,7 +92,7 @@ export async function removeAddOnFromBasket(
   basketId: number,
   addOnId: number,
 ): Promise<BasketAddOn | undefined> {
-  return await getDb()
+  return await db()
     .deleteFrom("basket_add_ons")
     .where("basket_id", "=", basketId)
     .where("add_on_id", "=", addOnId)
@@ -101,11 +101,11 @@ export async function removeAddOnFromBasket(
 }
 
 export async function clearBasket(basketId: number): Promise<void> {
-  await getDb()
+  await db()
     .deleteFrom("basket_slots")
     .where("basket_id", "=", basketId)
     .execute();
-  await getDb()
+  await db()
     .deleteFrom("basket_add_ons")
     .where("basket_id", "=", basketId)
     .execute();

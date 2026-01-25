@@ -5,7 +5,7 @@ import Pool from "pg-pool";
 
 let _db: Kysely<Database> | null = null;
 
-export function getDb(): Kysely<Database> {
+export function db(): Kysely<Database> {
   if (!_db) {
     const dialect = new PostgresDialect({
       pool: new Pool({
