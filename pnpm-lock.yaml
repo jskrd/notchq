@@ -41,9 +41,15 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.8
         version: 1.19.8(hono@4.11.4)
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       hono:
         specifier: ^4.11.4
         version: 4.11.4
+      zod:
+        specifier: ^4.3.5
+        version: 4.3.5
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
