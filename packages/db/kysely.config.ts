@@ -1,17 +1,15 @@
-import { getEnv } from "@repo/db/env";
+import { env } from "@repo/db/env";
 import { PostgresDialect } from "kysely";
 import { defineConfig } from "kysely-ctl";
 import Pool from "pg-pool";
 
-const env = getEnv();
-
 const dialect = new PostgresDialect({
   pool: new Pool({
-    host: env.DB_HOST,
-    port: env.DB_PORT,
-    database: env.DB_DATABASE,
-    user: env.DB_USER,
-    password: env.DB_PASSWORD,
+    host: env().DB_HOST,
+    port: env().DB_PORT,
+    database: env().DB_DATABASE,
+    user: env().DB_USER,
+    password: env().DB_PASSWORD,
   }),
 });
 
