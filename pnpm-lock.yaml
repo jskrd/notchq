@@ -128,6 +128,9 @@ importers:
       pg-pool:
         specifier: ^3.10.1
         version: 3.10.1(pg@8.16.3)
+      zod:
+        specifier: ^4.3.5
+        version: 4.3.5
     devDependencies:
       '@faker-js/faker':
         specifier: ^10.2.0
@@ -147,9 +150,6 @@ importers:
       rrule:
         specifier: ^2.8.1
         version: 2.8.1
-      zod:
-        specifier: ^4.3.5
-        version: 4.3.5
 
   packages/eslint-config:
     devDependencies:
