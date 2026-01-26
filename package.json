@@ -10,6 +10,8 @@
     "format": "prettier --write .",
     "lint": "pnpm -r run lint",
     "start": "pnpm -r --parallel run start",
+    "test": "pnpm -r run test",
+    "test:coverage": "pnpm -r run test:coverage",
     "typecheck": "pnpm -r run typecheck"
   },
   "engines": {
@@ -22,11 +24,12 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^24.0.3",
+    "@vitest/coverage-v8": "^4.0.16",
     "eslint": "^9.39.2",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.18"
   }
 }
