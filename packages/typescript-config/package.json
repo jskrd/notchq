@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@tsconfig/next": "2.0.5",
-    "@tsconfig/node24": "24.0.3",
+    "@tsconfig/node24": "24.0.4",
     "@tsconfig/strictest": "2.0.8",
     "typescript-eslint": "8.52.0"
   }
