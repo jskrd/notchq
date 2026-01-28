@@ -85,6 +85,30 @@ jobs:
       - name: Format check
         run: pnpm run format:check
 
+  knip:
+    name: Knip
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Download node_modules
+        uses: actions/download-artifact@v6
+        with:
+          name: node-modules
+
+      - name: Knip
+        run: pnpm run knip
+
   typecheck:
     name: Typecheck
     needs: setup
