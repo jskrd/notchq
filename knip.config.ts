@@ -1,48 +1,29 @@
 import type { KnipConfig } from "knip";
 
 const config: KnipConfig = {
+  // Plugins disabled - can't load configs with workspace imports
   eslint: false,
   vitest: false,
+  // Used via --coverage flag
   ignoreDependencies: ["@vitest/coverage-v8"],
+  // Config-only packages
+  ignoreWorkspaces: [
+    "packages/eslint-config",
+    "packages/typescript-config",
+    "packages/vitest-config",
+  ],
   workspaces: {
     "apps/api": {
-      entry: ["src/**/*.test.ts", "eslint.config.ts", "vitest.config.ts"],
+      entry: ["eslint.config.ts", "vitest.config.ts", "**/*.test.ts"],
     },
     "apps/book": {
-      entry: [
-        "src/app/**/*.{ts,tsx}",
-        "src/components/**/*.{ts,tsx}",
-        "eslint.config.ts",
-      ],
-      project: ["src/**/*.{ts,tsx}"],
+      entry: ["eslint.config.ts"],
+      // Indirect deps (Next.js peer/plugins)
       ignoreBinaries: ["next"],
-      ignoreDependencies: [
-        "@types/react-dom",
-        "postcss",
-        "react-dom",
-        "tailwindcss",
-      ],
+      ignoreDependencies: ["@types/react-dom", "postcss", "react-dom"],
     },
     "packages/db": {
       entry: ["eslint.config.ts", "kysely.config.ts"],
-      ignoreDependencies: ["@faker-js/faker", "@types/pg", "pg"],
-    },
-    "packages/eslint-config": {
-      entry: ["src/*.ts"],
-      project: ["src/**/*.ts"],
-    },
-    "packages/typescript-config": {
-      entry: ["*.json"],
-      ignoreDependencies: [
-        "@tsconfig/next",
-        "@tsconfig/node24",
-        "@tsconfig/strictest",
-        "typescript-eslint",
-      ],
-    },
-    "packages/vitest-config": {
-      entry: ["src/*.ts", "eslint.config.ts"],
-      project: ["src/**/*.ts"],
     },
   },
 };

@@ -5,12 +5,6 @@ import { ComponentPropsWithoutRef, HTMLAttributes, ReactNode } from "react";
 
 export const Dialog = DialogPrimitive.Root;
 
-export function DialogClose({
-  children,
-}: ComponentPropsWithoutRef<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close asChild>{children}</DialogPrimitive.Close>;
-}
-
 export function DialogContent({
   children,
   ...props
