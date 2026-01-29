@@ -52,8 +52,8 @@ jobs:
       - name: Check Linting
         run: pnpm run lint
 
-  check-type-checking:
-    name: Check Type Checking
+  check-type-safety:
+    name: Check Type Safety
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -71,5 +71,5 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Check Type Checking
+      - name: Check Type Safety
         run: pnpm run typecheck
