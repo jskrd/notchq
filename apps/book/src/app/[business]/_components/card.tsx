@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-export type CardProps = {
+type CardProps = {
   linkUrl: string;
   imageUrl: string | null;
   tagline: string | null;
