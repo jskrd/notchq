@@ -1,4 +1,4 @@
-name: Code quality
+name: Code Quality Checks
 
 on:
   pull_request:
@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  format-check:
-    name: Format check
+  check-formatting:
+    name: Check Formatting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v6
 
       - name: Setup pnpm
@@ -24,17 +24,17 @@ jobs:
           cache: "pnpm"
           node-version-file: ".nvmrc"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Format check
+      - name: Check Formatting
         run: pnpm run format:check
 
-  lint:
-    name: Lint
+  check-linting:
+    name: Check Linting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v6
 
       - name: Setup pnpm
@@ -46,17 +46,17 @@ jobs:
           cache: "pnpm"
           node-version-file: ".nvmrc"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
+      - name: Check Linting
         run: pnpm run lint
 
-  typecheck:
-    name: Typecheck
+  check-type-checking:
+    name: Check Type Checking
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v6
 
       - name: Setup pnpm
@@ -68,8 +68,8 @@ jobs:
           cache: "pnpm"
           node-version-file: ".nvmrc"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck
+      - name: Check Type Checking
         run: pnpm run typecheck

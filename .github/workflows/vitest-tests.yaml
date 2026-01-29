@@ -1,4 +1,4 @@
-name: Vitest test
+name: Vitest Tests
 
 on:
   pull_request:
@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Test
+  run-tests:
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v6
 
       - name: Setup pnpm
@@ -24,8 +24,8 @@ jobs:
           cache: "pnpm"
           node-version-file: ".nvmrc"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Test
+      - name: Run Tests
         run: pnpm run test
