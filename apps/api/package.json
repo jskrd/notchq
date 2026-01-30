@@ -6,8 +6,6 @@
     "start": "node src/index.ts",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc"
   },
   "dependencies": {
