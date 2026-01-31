@@ -2,18 +2,10 @@ import { hashPassword, verifyPassword } from "./password.ts";
 import { describe, expect, it } from "vitest";
 
 describe("hashPassword", () => {
-  it("produces hash in correct format", async () => {
+  it("produces hash with argon2id prefix", async () => {
     const hash = await hashPassword("password123");
-    const parts = hash.split("$");
 
-    expect(parts).toHaveLength(7);
-    expect(parts[0]).toBe("");
-    expect(parts[1]).toBe("scrypt");
-    expect(parts[2]).toBe("131072");
-    expect(parts[3]).toBe("8");
-    expect(parts[4]).toBe("1");
-    expect(Buffer.from(parts[5]!, "base64")).toHaveLength(32);
-    expect(Buffer.from(parts[6]!, "base64")).toHaveLength(64);
+    expect(hash).toMatch(/^\$argon2id\$/);
   });
 
   it("produces different hashes for same password", async () => {
@@ -27,87 +19,28 @@ describe("hashPassword", () => {
 describe("verifyPassword", () => {
   it("returns true for correct password", async () => {
     const password = "mySecurePassword!";
-    const hash = await hashPassword(password);
+    const digest = await hashPassword(password);
 
-    const result = await verifyPassword(password, hash);
+    const result = await verifyPassword(digest, password);
 
     expect(result).toBe(true);
   });
 
   it("returns false for incorrect password", async () => {
-    const hash = await hashPassword("correctPassword");
+    const digest = await hashPassword("correctPassword");
 
-    const result = await verifyPassword("wrongPassword", hash);
-
-    expect(result).toBe(false);
-  });
-
-  it("returns false for malformed hash - missing parts", async () => {
-    const result = await verifyPassword("password", "$scrypt$131072$8$1");
+    const result = await verifyPassword(digest, "wrongPassword");
 
     expect(result).toBe(false);
   });
 
-  it("returns false for malformed hash - wrong prefix", async () => {
-    const result = await verifyPassword(
-      "password",
-      "$bcrypt$131072$8$1$salt$hash",
-    );
-
-    expect(result).toBe(false);
+  it("throws for malformed digest", async () => {
+    await expect(
+      verifyPassword("not-a-valid-digest", "password"),
+    ).rejects.toThrow(TypeError);
   });
 
-  it("returns false for malformed hash - invalid N parameter", async () => {
-    const salt = Buffer.from("a".repeat(32)).toString("base64");
-    const hash = Buffer.from("b".repeat(64)).toString("base64");
-
-    const result = await verifyPassword(
-      "password",
-      `$scrypt$invalid$8$1$${salt}$${hash}`,
-    );
-
-    expect(result).toBe(false);
-  });
-
-  it("returns false for empty hash", async () => {
-    const result = await verifyPassword("password", "");
-
-    expect(result).toBe(false);
-  });
-
-  it("returns false for invalid salt length", async () => {
-    const salt = Buffer.from("tooshort").toString("base64");
-    const hash = Buffer.from("a".repeat(64)).toString("base64");
-
-    const result = await verifyPassword(
-      "password",
-      `$scrypt$131072$8$1$${salt}$${hash}`,
-    );
-
-    expect(result).toBe(false);
-  });
-
-  it("returns false for invalid hash length", async () => {
-    const salt = Buffer.from("a".repeat(32)).toString("base64");
-    const hash = Buffer.from("tooshort").toString("base64");
-
-    const result = await verifyPassword(
-      "password",
-      `$scrypt$131072$8$1$${salt}$${hash}`,
-    );
-
-    expect(result).toBe(false);
-  });
-
-  it("returns false for extreme scrypt parameters", async () => {
-    const salt = Buffer.from("a".repeat(32)).toString("base64");
-    const hash = Buffer.from("b".repeat(64)).toString("base64");
-
-    const result = await verifyPassword(
-      "password",
-      `$scrypt$999999999$8$1$${salt}$${hash}`,
-    );
-
-    expect(result).toBe(false);
+  it("throws for empty digest", async () => {
+    await expect(verifyPassword("", "password")).rejects.toThrow(TypeError);
   });
 });
