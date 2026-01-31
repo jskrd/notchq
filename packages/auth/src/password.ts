@@ -82,16 +82,20 @@ export async function verifyPassword(
   const salt = Buffer.from(saltString, "base64");
   const expectedHash = Buffer.from(hashString, "base64");
 
-  const hash = await scryptAsync(password, salt, KEY_LENGTH, {
-    N: costFactor,
-    r: blockSize,
-    p: parallelization,
-    maxmem: MAX_MEM,
-  });
-
-  if (hash.length !== expectedHash.length) {
+  if (salt.length !== SALT_LENGTH || expectedHash.length !== KEY_LENGTH) {
     return false;
   }
 
-  return timingSafeEqual(hash, expectedHash);
+  try {
+    const hash = await scryptAsync(password, salt, KEY_LENGTH, {
+      N: costFactor,
+      r: blockSize,
+      p: parallelization,
+      maxmem: MAX_MEM,
+    });
+
+    return timingSafeEqual(hash, expectedHash);
+  } catch {
+    return false;
+  }
 }

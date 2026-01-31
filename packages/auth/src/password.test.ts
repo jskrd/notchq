@@ -74,4 +74,40 @@ describe("verifyPassword", () => {
 
     expect(result).toBe(false);
   });
+
+  it("returns false for invalid salt length", async () => {
+    const salt = Buffer.from("tooshort").toString("base64");
+    const hash = Buffer.from("a".repeat(64)).toString("base64");
+
+    const result = await verifyPassword(
+      "password",
+      `$scrypt$131072$8$1$${salt}$${hash}`,
+    );
+
+    expect(result).toBe(false);
+  });
+
+  it("returns false for invalid hash length", async () => {
+    const salt = Buffer.from("a".repeat(32)).toString("base64");
+    const hash = Buffer.from("tooshort").toString("base64");
+
+    const result = await verifyPassword(
+      "password",
+      `$scrypt$131072$8$1$${salt}$${hash}`,
+    );
+
+    expect(result).toBe(false);
+  });
+
+  it("returns false for extreme scrypt parameters", async () => {
+    const salt = Buffer.from("a".repeat(32)).toString("base64");
+    const hash = Buffer.from("b".repeat(64)).toString("base64");
+
+    const result = await verifyPassword(
+      "password",
+      `$scrypt$999999999$8$1$${salt}$${hash}`,
+    );
+
+    expect(result).toBe(false);
+  });
 });
