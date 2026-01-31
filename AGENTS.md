@@ -15,6 +15,11 @@
 - Prettier default formatting
 - Use functional patterns where possible
 
+## Commit messages
+
+- Use conventional commits format: `type: description`
+- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
 ## Documentation
 
 - Auth architecture and implementation plan: `docs/auth.md`
