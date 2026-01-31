@@ -1,4 +1,4 @@
-import { hashPassword, verifyPassword } from "./password.js";
+import { hashPassword, verifyPassword } from "./password.ts";
 import { describe, expect, it } from "vitest";
 
 describe("hashPassword", () => {

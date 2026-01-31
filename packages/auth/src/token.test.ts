@@ -7,7 +7,7 @@ import {
   TOKEN_PREFIX,
   VALIDATOR_LENGTH,
   verifyValidator,
-} from "./token.js";
+} from "./token.ts";
 import { describe, expect, it } from "vitest";
 
 describe("generateToken", () => {
