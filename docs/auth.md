@@ -113,8 +113,8 @@ Only update `expires_at` and `last_used_at` if `last_used_at` is more than 1 hou
 
 Build the core token-based authentication:
 
-- [ ] Password hashing utilities in `packages/auth`
-- [ ] Token generation/validation in `packages/auth`
+- [x] Password hashing utilities in `packages/auth`
+- [x] Token generation/validation in `packages/auth`
 - [ ] Login endpoint in `apps/api`
 - [ ] Registration endpoint in `apps/api`
 - [ ] Token validation middleware in `apps/api`

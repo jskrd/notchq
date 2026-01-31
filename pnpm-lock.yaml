@@ -120,6 +120,18 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18
 
+  packages/auth:
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@repo/vitest-config':
+        specifier: workspace:*
+        version: link:../vitest-config
+
   packages/db:
     dependencies:
       kysely:
