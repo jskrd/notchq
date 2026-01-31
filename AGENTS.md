@@ -14,3 +14,7 @@
 - TypeScript strict mode
 - Prettier default formatting
 - Use functional patterns where possible
+
+## Documentation
+
+- Auth architecture and implementation plan: `docs/auth.md`
