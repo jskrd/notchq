@@ -3,21 +3,21 @@ import { createClient } from "redis";
 
 export type RedisClient = ReturnType<typeof createClient>;
 
-let _client: RedisClient | null = null;
+let client: RedisClient | null = null;
 
-export async function client(): Promise<RedisClient> {
-  if (!_client) {
-    _client = createClient({
+export async function kvs(): Promise<RedisClient> {
+  if (!client) {
+    client = createClient({
       url: env().KVS_URL,
     });
-    await _client.connect();
+    await client.connect();
   }
-  return _client;
+  return client;
 }
 
-export function destroy(): void {
-  if (_client) {
-    _client.destroy();
-    _client = null;
+export function destroyKvs(): void {
+  if (client) {
+    client.destroy();
+    client = null;
   }
 }
