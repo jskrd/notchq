@@ -3,10 +3,10 @@ import type { Database } from "@repo/rdb/types";
 import { Kysely, PostgresDialect, sql } from "kysely";
 import Pool from "pg-pool";
 
-let _rdb: Kysely<Database> | null = null;
+let db: Kysely<Database> | null = null;
 
 export function rdb(): Kysely<Database> {
-  if (!_rdb) {
+  if (!db) {
     const dialect = new PostgresDialect({
       pool: new Pool({
         host: env().RDB_HOST,
@@ -16,9 +16,14 @@ export function rdb(): Kysely<Database> {
         password: env().RDB_PASSWORD,
       }),
     });
-    _rdb = new Kysely<Database>({ dialect });
+    db = new Kysely<Database>({ dialect });
   }
-  return _rdb;
+  return db;
+}
+
+export function destroyRdb(): void {
+  db?.destroy();
+  db = null;
 }
 
 export { sql };
