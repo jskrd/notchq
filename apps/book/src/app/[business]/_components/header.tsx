@@ -37,6 +37,10 @@ function getBusinessImage(business: Business): {
     return { src: "/pooch-parks.png", width: 197, height: 55 };
   }
 
+  if (business.slug === "the-big-london-bake") {
+    return { src: "/the-big-london-bake.png", width: 79, height: 55 };
+  }
+
   if (business.slug.startsWith("true-")) {
     return { src: "/true.png", width: 133, height: 55 };
   }
