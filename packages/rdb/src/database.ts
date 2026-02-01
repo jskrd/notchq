@@ -9,11 +9,11 @@ export function rdb(): Kysely<Database> {
   if (!_rdb) {
     const dialect = new PostgresDialect({
       pool: new Pool({
-        host: env().DB_HOST,
-        port: env().DB_PORT,
-        database: env().DB_DATABASE,
-        user: env().DB_USER,
-        password: env().DB_PASSWORD,
+        host: env().RDB_HOST,
+        port: env().RDB_PORT,
+        database: env().RDB_DATABASE,
+        user: env().RDB_USER,
+        password: env().RDB_PASSWORD,
       }),
     });
     _rdb = new Kysely<Database>({ dialect });
