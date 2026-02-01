@@ -10,11 +10,7 @@ config({
 });
 
 const envSchema = z.object({
-  RDB_HOST: z.string().min(1),
-  RDB_PORT: z.coerce.number().min(1).max(65535),
-  RDB_DATABASE: z.string().min(1),
-  RDB_USER: z.string().min(1),
-  RDB_PASSWORD: z.string().min(1),
+  RDB_URL: z.string().min(1),
 });
 
 type Env = z.infer<typeof envSchema>;
