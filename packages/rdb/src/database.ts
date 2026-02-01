@@ -1,12 +1,12 @@
-import { env } from "@repo/db/env";
-import type { Database } from "@repo/db/types";
+import { env } from "@repo/rdb/env";
+import type { Database } from "@repo/rdb/types";
 import { Kysely, PostgresDialect, sql } from "kysely";
 import Pool from "pg-pool";
 
-let _db: Kysely<Database> | null = null;
+let _rdb: Kysely<Database> | null = null;
 
-export function db(): Kysely<Database> {
-  if (!_db) {
+export function rdb(): Kysely<Database> {
+  if (!_rdb) {
     const dialect = new PostgresDialect({
       pool: new Pool({
         host: env().DB_HOST,
@@ -16,9 +16,9 @@ export function db(): Kysely<Database> {
         password: env().DB_PASSWORD,
       }),
     });
-    _db = new Kysely<Database>({ dialect });
+    _rdb = new Kysely<Database>({ dialect });
   }
-  return _db;
+  return _rdb;
 }
 
 export { sql };

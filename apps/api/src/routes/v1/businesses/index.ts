@@ -1,7 +1,7 @@
 import { businessCollection } from "../../../resources/business.ts";
 import { paginationSchema } from "../../../schemas/pagination.ts";
 import { slugSchema } from "../../../schemas/slug.ts";
-import { db } from "@repo/db/database";
+import { rdb } from "@repo/rdb/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
@@ -18,7 +18,7 @@ app.get("/", async (c) => {
     return c.json(z.flattenError(queryParam.error), 422);
   }
 
-  let query = db()
+  let query = rdb()
     .selectFrom("businesses")
     .orderBy("name", "asc")
     .selectAll()

@@ -1,4 +1,4 @@
-import type { Offering } from "@repo/db/types";
+import type { Offering } from "@repo/rdb/types";
 
 export function offeringResource(offering: Offering) {
   return {

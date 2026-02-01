@@ -42,9 +42,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.9
         version: 1.19.9(hono@4.11.7)
-      '@repo/db':
+      '@repo/rdb':
         specifier: workspace:*
-        version: link:../../packages/db
+        version: link:../../packages/rdb
       hono:
         specifier: ^4.11.7
         version: 4.11.7
@@ -136,7 +136,25 @@ importers:
         specifier: workspace:*
         version: link:../vitest-config
 
-  packages/db:
+  packages/eslint-config:
+    devDependencies:
+      '@eslint/js':
+        specifier: 9.39.2
+        version: 9.39.2
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      eslint-config-next:
+        specifier: 16.1.6
+        version: 16.1.6(@typescript-eslint/parser@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+      eslint-config-prettier:
+        specifier: 10.1.8
+        version: 10.1.8(eslint@9.39.2(jiti@2.6.1))
+      typescript-eslint:
+        specifier: 8.54.0
+        version: 8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+
+  packages/rdb:
     dependencies:
       kysely:
         specifier: 0.28.10
@@ -169,24 +187,6 @@ importers:
       rrule:
         specifier: ^2.8.1
         version: 2.8.1
-
-  packages/eslint-config:
-    devDependencies:
-      '@eslint/js':
-        specifier: 9.39.2
-        version: 9.39.2
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      eslint-config-next:
-        specifier: 16.1.6
-        version: 16.1.6(@typescript-eslint/parser@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
-      eslint-config-prettier:
-        specifier: 10.1.8
-        version: 10.1.8(eslint@9.39.2(jiti@2.6.1))
-      typescript-eslint:
-        specifier: 8.54.0
-        version: 8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
 
   packages/typescript-config:
     devDependencies:
@@ -3424,9 +3424,6 @@ packages:
     peerDependencies:
       pg: '>=8.0'
 
-  pg-protocol@1.10.3:
-    resolution: {integrity: sha512-6DIBgBQaTKDJyxnXaLiLR8wBpQQcGWuAESkRBX/t6OwA8YsqP+iVSiond2EDy6Y/dsGk8rh/jtax3js5NeV7JQ==}
-
   pg-protocol@1.11.0:
     resolution: {integrity: sha512-pfsxk2M9M3BuGgDOfuy37VNRRX3jmKgMjcvAcWqNDpZSf4cUmv8HSOl5ViRQFsfARFn0KuUQTgLxVMbNq5NW3g==}
 
@@ -5700,7 +5697,7 @@ snapshots:
   '@types/pg@8.16.0':
     dependencies:
       '@types/node': 25.1.0
-      pg-protocol: 1.10.3
+      pg-protocol: 1.11.0
       pg-types: 2.2.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.10)':
@@ -7568,8 +7565,6 @@ snapshots:
   pg-pool@3.11.0(pg@8.18.0):
     dependencies:
       pg: 8.18.0
-
-  pg-protocol@1.10.3: {}
 
   pg-protocol@1.11.0: {}
 
