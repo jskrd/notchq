@@ -18,6 +18,10 @@ app.get("/", async (c) => {
     return c.json(z.flattenError(queryParam.error), 422);
   }
 
+  if (!queryParam.data.slug) {
+    return c.json({ error: "Listing all businesses is not permitted" }, 403);
+  }
+
   let query = rdb()
     .selectFrom("businesses")
     .orderBy("name", "asc")
