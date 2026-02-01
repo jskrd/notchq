@@ -16,8 +16,6 @@ export async function kvs(): Promise<RedisClient> {
 }
 
 export function destroyKvs(): void {
-  if (client) {
-    client.destroy();
-    client = null;
-  }
+  client?.destroy();
+  client = null;
 }
