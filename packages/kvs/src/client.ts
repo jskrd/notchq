@@ -15,9 +15,9 @@ export async function client(): Promise<RedisClient> {
   return _client;
 }
 
-export async function disconnect(): Promise<void> {
+export function destroy(): void {
   if (_client) {
-    await _client.disconnect();
+    _client.destroy();
     _client = null;
   }
 }
