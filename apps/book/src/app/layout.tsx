@@ -9,6 +9,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "NotchQ",
   description: "",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({
