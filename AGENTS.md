@@ -9,6 +9,13 @@
 - Run tests: `pnpm test`
 - Run type check: `pnpm typecheck`
 
+## Project structure
+
+- `apps/api` - Hono REST API serving business, offering, and booking data
+- `apps/book` - Next.js booking interface for customers
+- `packages/auth` - Argon2 password hashing utilities
+- `packages/rdb` - Kysely database schema and queries for PostgreSQL
+
 ## Code style
 
 - TypeScript strict mode
