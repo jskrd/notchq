@@ -1,17 +1,5 @@
+import type { Offering } from "@repo/book/app/[business]/_lib/get-offerings";
 import { env } from "@repo/book/lib/env";
-
-export interface Offering {
-  id: number;
-  business_id: number;
-  slug: string;
-  name: string;
-  description: string;
-  image_url: string | null;
-  accent_color: string | null;
-  timezone: string;
-  currency: string;
-  created_at: Date;
-}
 
 interface ApiOffering {
   id: number;
