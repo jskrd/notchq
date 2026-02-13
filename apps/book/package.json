@@ -10,11 +10,11 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "lucide-react": "^0.563.0",
+    "lucide-react": "^0.564.0",
     "next": "^16.1.6",
     "radix-ui": "^1.4.3",
     "react": "^19.2.4",
-    "react-day-picker": "^9.13.0",
+    "react-day-picker": "^9.13.2",
     "react-dom": "^19.2.4",
     "react-markdown": "^10.1.0",
     "sharp": "^0.34.5",
@@ -24,7 +24,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/react": "^19.2.13",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "clsx": "^2.1.1",
     "postcss": "^8.5.6",
