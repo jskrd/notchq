@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      dotenv:
-        specifier: ^17.2.4
-        version: 17.2.4
     devDependencies:
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^6.0.2

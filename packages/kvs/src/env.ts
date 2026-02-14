@@ -1,13 +1,7 @@
-import { config } from "dotenv";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "path";
 import { z } from "zod";
 
-const currentDir = dirname(fileURLToPath(import.meta.url));
-
-config({
-  path: resolve(currentDir, "../../../.env"),
-});
+process.loadEnvFile(resolve(import.meta.dirname, "../../../.env"));
 
 const envSchema = z.object({
   KVS_URL: z.url(),

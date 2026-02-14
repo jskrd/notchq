@@ -1,11 +1,7 @@
-import { config } from "dotenv";
 import type { NextConfig } from "next";
-import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
+import { resolve } from "path";
 
-config({
-  path: resolve(dirname(fileURLToPath(import.meta.url)), "../../.env"),
-});
+process.loadEnvFile(resolve(import.meta.dirname, "../../.env"));
 
 const nextConfig: NextConfig = {
   images: {
