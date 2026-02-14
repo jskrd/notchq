@@ -1,5 +1,5 @@
 import { businessResource } from "../../../resources/business.ts";
-import { rdb } from "@repo/rdb/database";
+import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
@@ -13,7 +13,7 @@ app.get("/", async (c) => {
     return c.notFound();
   }
 
-  const business = await rdb()
+  const business = await db()
     .selectFrom("businesses")
     .where("id", "=", pathParam.data.id)
     .selectAll()

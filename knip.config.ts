@@ -2,7 +2,7 @@ import type { KnipConfig } from "knip";
 
 const config: KnipConfig = {
   workspaces: {
-    "packages/rdb": {
+    "packages/db": {
       entry: ["kysely.config.ts"],
     },
   },

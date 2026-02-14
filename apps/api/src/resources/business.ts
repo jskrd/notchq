@@ -1,4 +1,4 @@
-import type { Business } from "@repo/rdb/types";
+import type { Business } from "@repo/db/types";
 
 export function businessResource(business: Business) {
   return {

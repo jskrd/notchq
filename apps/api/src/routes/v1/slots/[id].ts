@@ -1,5 +1,5 @@
 import { slotResource } from "../../../resources/slot.ts";
-import { rdb } from "@repo/rdb/database";
+import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
@@ -13,7 +13,7 @@ app.get("/", async (c) => {
     return c.notFound();
   }
 
-  const slot = await rdb()
+  const slot = await db()
     .selectFrom("slots")
     .where("id", "=", pathParam.data.id)
     .selectAll()

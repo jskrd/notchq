@@ -1,7 +1,7 @@
 import { slotCollection } from "../../../../resources/slot.ts";
 import { dateSchema } from "../../../../schemas/date.ts";
 import { paginationSchema } from "../../../../schemas/pagination.ts";
-import { rdb } from "@repo/rdb/database";
+import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
@@ -29,7 +29,7 @@ app.get("/", async (c) => {
   const endOfDay = new Date(startOfDay);
   endOfDay.setDate(endOfDay.getDate() + 1);
 
-  const slots = await rdb()
+  const slots = await db()
     .selectFrom("slots")
     .where("offering_id", "=", pathParam.data.id)
     .where("start", ">=", startOfDay)

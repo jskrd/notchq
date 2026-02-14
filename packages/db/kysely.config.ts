@@ -1,11 +1,11 @@
-import { env } from "@repo/rdb/env";
+import { env } from "@repo/db/env";
 import { PostgresDialect } from "kysely";
 import { defineConfig } from "kysely-ctl";
 import Pool from "pg-pool";
 
 const dialect = new PostgresDialect({
   pool: new Pool({
-    connectionString: env().RDB_URL,
+    connectionString: env().DB_URL,
   }),
 });
 

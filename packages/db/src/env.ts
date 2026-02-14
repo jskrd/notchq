@@ -11,7 +11,7 @@ if (existsSync(envPath)) {
 }
 
 const envSchema = z.object({
-  RDB_URL: z.string().min(1),
+  DB_URL: z.string().min(1),
 });
 
 type Env = z.infer<typeof envSchema>;

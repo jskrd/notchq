@@ -1,4 +1,4 @@
-import { rdb } from "@repo/rdb/database";
+import { db } from "@repo/db/database";
 import type {
   AddOn,
   Business,
@@ -6,7 +6,7 @@ import type {
   NewSlot,
   Offering,
   Slot,
-} from "@repo/rdb/types";
+} from "@repo/db/types";
 import { RRule } from "rrule";
 
 export async function seed(): Promise<void> {
@@ -17,7 +17,7 @@ export async function seed(): Promise<void> {
 }
 
 async function seedBusiness(): Promise<Business> {
-  return await rdb()
+  return await db()
     .insertInto("businesses")
     .values({
       slug: "lba",
@@ -28,7 +28,7 @@ async function seedBusiness(): Promise<Business> {
 }
 
 async function seedOfferings(business: Business): Promise<Offering[]> {
-  return await rdb()
+  return await db()
     .insertInto("offerings")
     .values([
       {
@@ -98,7 +98,7 @@ async function seedAddOns(offerings: Offering[]): Promise<AddOn[]> {
     });
   }
 
-  return await rdb()
+  return await db()
     .insertInto("add_ons")
     .values(newAddOns)
     .returningAll()
@@ -150,7 +150,7 @@ async function seedSlots(offerings: Offering[]): Promise<Slot[]> {
     }
   }
 
-  return await rdb()
+  return await db()
     .insertInto("slots")
     .values(newSlots)
     .returningAll()

@@ -1,5 +1,5 @@
 {
-  "name": "@repo/rdb",
+  "name": "@repo/db",
   "type": "module",
   "exports": {
     "./*": "./src/*.ts"

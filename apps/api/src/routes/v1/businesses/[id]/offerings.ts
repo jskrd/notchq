@@ -1,7 +1,7 @@
 import { offeringCollection } from "../../../../resources/offering.ts";
 import { paginationSchema } from "../../../../schemas/pagination.ts";
 import { slugSchema } from "../../../../schemas/slug.ts";
-import { rdb } from "@repo/rdb/database";
+import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
@@ -25,7 +25,7 @@ app.get("/", async (c) => {
     return c.json(z.flattenError(queryParam.error), 422);
   }
 
-  let query = rdb()
+  let query = db()
     .selectFrom("offerings")
     .where("business_id", "=", pathParam.data.id)
     .where("deleted_at", "is", null)

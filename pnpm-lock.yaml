@@ -38,9 +38,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.19.9
         version: 1.19.9(hono@4.11.8)
-      '@repo/rdb':
+      '@repo/db':
         specifier: workspace:*
-        version: link:../../packages/rdb
+        version: link:../../packages/db
       hono:
         specifier: ^4.11.8
         version: 4.11.8
@@ -132,6 +132,40 @@ importers:
         specifier: workspace:*
         version: link:../vitest-config
 
+  packages/db:
+    dependencies:
+      kysely:
+        specifier: 0.28.11
+        version: 0.28.11
+      kysely-ctl:
+        specifier: 0.20.0
+        version: 0.20.0(kysely@0.28.11)(magicast@0.5.1)(typescript@5.9.3)
+      pg:
+        specifier: ^8.18.0
+        version: 8.18.0
+      pg-pool:
+        specifier: ^3.11.0
+        version: 3.11.0(pg@8.18.0)
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/pg':
+        specifier: ^8.16.0
+        version: 8.16.0
+      '@types/pg-pool':
+        specifier: ^2.0.7
+        version: 2.0.7
+      rrule:
+        specifier: ^2.8.1
+        version: 2.8.1
+
   packages/eslint-config:
     devDependencies:
       '@eslint/js':
@@ -165,40 +199,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-
-  packages/rdb:
-    dependencies:
-      kysely:
-        specifier: 0.28.11
-        version: 0.28.11
-      kysely-ctl:
-        specifier: 0.20.0
-        version: 0.20.0(kysely@0.28.11)(magicast@0.5.1)(typescript@5.9.3)
-      pg:
-        specifier: ^8.18.0
-        version: 8.18.0
-      pg-pool:
-        specifier: ^3.11.0
-        version: 3.11.0(pg@8.18.0)
-      zod:
-        specifier: ^4.3.6
-        version: 4.3.6
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/pg':
-        specifier: ^8.16.0
-        version: 8.16.0
-      '@types/pg-pool':
-        specifier: ^2.0.7
-        version: 2.0.7
-      rrule:
-        specifier: ^2.8.1
-        version: 2.8.1
 
   packages/typescript-config:
     devDependencies:

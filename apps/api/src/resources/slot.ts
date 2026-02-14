@@ -1,4 +1,4 @@
-import type { Slot } from "@repo/rdb/types";
+import type { Slot } from "@repo/db/types";
 
 export function slotResource(slot: Slot) {
   return {
