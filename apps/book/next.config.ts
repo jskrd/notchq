@@ -1,7 +1,14 @@
+import { existsSync } from "fs";
 import type { NextConfig } from "next";
 import { resolve } from "path";
 
-process.loadEnvFile(resolve(import.meta.dirname, "../../.env"));
+const envPath = resolve(
+  import.meta.dirname,
+  `../../.env.${process.env["NODE_ENV"]}`,
+);
+if (existsSync(envPath)) {
+  process.loadEnvFile(envPath);
+}
 
 const nextConfig: NextConfig = {
   images: {
