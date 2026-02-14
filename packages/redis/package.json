@@ -1,5 +1,5 @@
 {
-  "name": "@repo/kvs",
+  "name": "@repo/redis",
   "type": "module",
   "exports": {
     "./*": "./src/*.ts"

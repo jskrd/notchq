@@ -11,7 +11,7 @@ if (existsSync(envPath)) {
 }
 
 const envSchema = z.object({
-  KVS_URL: z.url(),
+  REDIS_URL: z.url(),
 });
 
 type Env = z.infer<typeof envSchema>;

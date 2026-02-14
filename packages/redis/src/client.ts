@@ -5,17 +5,17 @@ export type RedisClient = ReturnType<typeof createClient>;
 
 let client: RedisClient | null = null;
 
-export async function kvs(): Promise<RedisClient> {
+export async function redis(): Promise<RedisClient> {
   if (!client) {
     client = createClient({
-      url: env().KVS_URL,
+      url: env().REDIS_URL,
     });
     await client.connect();
   }
   return client;
 }
 
-export function destroyKvs(): void {
+export function destroyRedis(): void {
   client?.destroy();
   client = null;
 }
