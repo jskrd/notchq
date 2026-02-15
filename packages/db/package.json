@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^10.3.0",
+    "@repo/auth": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/pg": "^8.16.0",
