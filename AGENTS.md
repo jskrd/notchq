@@ -33,6 +33,10 @@
 
 ## Testing
 
+- Tests must be able to run in parallel — no test should depend on execution order or shared mutable state
+- Each test creates its own data (via factories); no cleanup required — leftover data must not affect other tests
 - Use `@repo/db/factories` to create test database records (e.g. `createUser()`, `createOffering()`)
 - Factories accept optional `Partial<NewEntity>` overrides and auto-create required parent records
 - Optional FKs (like `basket.user_id`) default to `null` — don't auto-create for those
+- External services (e.g. Stripe) must be mocked — tests must never send real requests to external APIs
+- Internal services (PostgreSQL, Redis) are expected to be running — tests read and write real data against them, no mocking
