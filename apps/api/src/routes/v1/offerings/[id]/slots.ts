@@ -45,4 +45,6 @@ app.get("/", async (c) => {
   });
 });
 
+app.all("/", (c) => c.body(null, 405));
+
 export default app;
