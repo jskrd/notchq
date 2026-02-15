@@ -5,7 +5,7 @@ export function businessResource(business: Business) {
     id: business.id,
     slug: business.slug,
     name: business.name,
-    created_at: business.created_at,
+    created_at: business.created_at.toISOString(),
   };
 }
 

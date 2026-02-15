@@ -11,7 +11,7 @@ export function offeringResource(offering: Offering) {
     accent_color: offering.accent_color,
     timezone: offering.timezone,
     currency: offering.currency,
-    created_at: offering.created_at,
+    created_at: offering.created_at.toISOString(),
   };
 }
 
