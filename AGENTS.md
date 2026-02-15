@@ -30,3 +30,9 @@
 ## Documentation
 
 - Auth architecture and implementation plan: `docs/auth.md`
+
+## Testing
+
+- Use `@repo/db/factories` to create test database records (e.g. `createUser()`, `createOffering()`)
+- Factories accept optional `Partial<NewEntity>` overrides and auto-create required parent records
+- Optional FKs (like `basket.user_id`) default to `null` — don't auto-create for those
