@@ -30,7 +30,9 @@ describe("GET /v1/offerings/:id", () => {
   });
 
   it("returns 404 for soft-deleted offering", async () => {
-    const offering = await createOffering({ deleted_at: new Date() });
+    const offering = await createOffering({
+      deleted_at: new Date().toISOString(),
+    });
 
     const response = await app.request(`/v1/offerings/${offering.id}`);
     expect(response.status).toBe(404);

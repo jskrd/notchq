@@ -94,7 +94,7 @@ describe("GET /v1/businesses/:id/offerings", () => {
     const business = await createBusiness();
     await createOffering({
       business_id: business.id,
-      deleted_at: new Date(),
+      deleted_at: new Date().toISOString(),
     });
 
     const response = await app.request(
