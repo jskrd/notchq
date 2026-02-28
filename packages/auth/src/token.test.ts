@@ -2,10 +2,6 @@ import {
   generateToken,
   hashValidator,
   parseToken,
-  SELECTOR_LENGTH,
-  TOKEN_LENGTH,
-  TOKEN_PREFIX,
-  VALIDATOR_LENGTH,
   verifyValidator,
 } from "./token.ts";
 import { describe, expect, it } from "vitest";
@@ -14,18 +10,18 @@ describe("generateToken", () => {
   it("generates token with correct length", () => {
     const token = generateToken();
 
-    expect(token).toHaveLength(TOKEN_LENGTH);
+    expect(token).toHaveLength(99);
   });
 
   it("generates token with correct prefix", () => {
     const token = generateToken();
 
-    expect(token.startsWith(TOKEN_PREFIX)).toBe(true);
+    expect(token.startsWith("nq_")).toBe(true);
   });
 
   it("generates token with base62 characters only", () => {
     const token = generateToken();
-    const withoutPrefix = token.slice(TOKEN_PREFIX.length);
+    const withoutPrefix = token.slice(3);
     const base62Regex = /^[0-9A-Za-z]+$/;
 
     expect(base62Regex.test(withoutPrefix)).toBe(true);
@@ -48,12 +44,12 @@ describe("parseToken", () => {
     const parsed = parseToken(token);
 
     expect(parsed).not.toBeNull();
-    expect(parsed!.selector).toHaveLength(SELECTOR_LENGTH);
-    expect(parsed!.validator).toHaveLength(VALIDATOR_LENGTH);
+    expect(parsed!.selector).toHaveLength(32);
+    expect(parsed!.validator).toHaveLength(64);
   });
 
   it("returns null for token with wrong prefix", () => {
-    const token = "xx_" + "a".repeat(SELECTOR_LENGTH + VALIDATOR_LENGTH);
+    const token = "xx_" + "a".repeat(96);
 
     const parsed = parseToken(token);
 
@@ -61,7 +57,7 @@ describe("parseToken", () => {
   });
 
   it("returns null for token with wrong length", () => {
-    const token = TOKEN_PREFIX + "tooshort";
+    const token = "nq_tooshort";
 
     const parsed = parseToken(token);
 
@@ -69,8 +65,7 @@ describe("parseToken", () => {
   });
 
   it("returns null for token with invalid characters", () => {
-    const token =
-      TOKEN_PREFIX + "!".repeat(SELECTOR_LENGTH) + "@".repeat(VALIDATOR_LENGTH);
+    const token = "nq_" + "!".repeat(32) + "@".repeat(64);
 
     const parsed = parseToken(token);
 
@@ -89,7 +84,7 @@ describe("parseToken", () => {
 
     expect(parsed).not.toBeNull();
 
-    const reconstructed = `${TOKEN_PREFIX}${parsed!.selector}${parsed!.validator}`;
+    const reconstructed = `nq_${parsed!.selector}${parsed!.validator}`;
 
     expect(reconstructed).toBe(token);
   });

@@ -1,10 +1,9 @@
 import { createHash, randomBytes, timingSafeEqual } from "crypto";
 
-export const TOKEN_PREFIX = "nq_";
-export const SELECTOR_LENGTH = 32;
-export const VALIDATOR_LENGTH = 64;
-export const TOKEN_LENGTH =
-  TOKEN_PREFIX.length + SELECTOR_LENGTH + VALIDATOR_LENGTH; // 99
+const TOKEN_PREFIX = "nq_";
+const SELECTOR_LENGTH = 32;
+const VALIDATOR_LENGTH = 64;
+const TOKEN_LENGTH = TOKEN_PREFIX.length + SELECTOR_LENGTH + VALIDATOR_LENGTH; // 99
 
 export interface ParsedToken {
   selector: string;
