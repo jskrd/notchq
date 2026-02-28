@@ -2,12 +2,12 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r run build",
+    "check": "pnpm format:check && pnpm lint && pnpm knip && pnpm typecheck",
     "db": "pnpm --filter @repo/db exec kysely --",
     "db:down": "pnpm --filter @repo/db exec kysely migrate rollback --all",
     "db:seed": "pnpm --filter @repo/db exec kysely seed run",
     "db:up": "pnpm --filter @repo/db exec kysely migrate latest",
     "dev": "pnpm -r --parallel run dev",
-    "check": "pnpm format:check && pnpm lint && pnpm knip && pnpm typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "knip": "knip",
