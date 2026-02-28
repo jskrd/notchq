@@ -1,13 +1,12 @@
-import { offeringCollection } from "../resources/offering.ts";
-import { paginationSchema } from "../schemas/pagination.ts";
-import { slugSchema } from "../schemas/slug.ts";
+import { offeringCollection } from "../resources/index.ts";
+import { paginationSchema, slugSchema } from "../schemas/index.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
-const app = new Hono();
+const businessOfferings = new Hono();
 
-app.get("/", async (c) => {
+businessOfferings.get("/", async (c) => {
   const pathParam = z
     .object({ id: z.coerce.number().int().positive() })
     .safeParse(c.req.param());
@@ -43,6 +42,6 @@ app.get("/", async (c) => {
   });
 });
 
-app.all("/", (c) => c.body(null, 405));
+businessOfferings.all("/", (c) => c.body(null, 405));
 
-export default app;
+export { businessOfferings };

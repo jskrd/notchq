@@ -1,13 +1,12 @@
-import { slotCollection } from "../resources/slot.ts";
-import { dateSchema } from "../schemas/date.ts";
-import { paginationSchema } from "../schemas/pagination.ts";
+import { slotCollection } from "../resources/index.ts";
+import { dateSchema, paginationSchema } from "../schemas/index.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
-const app = new Hono();
+const offeringSlots = new Hono();
 
-app.get("/", async (c) => {
+offeringSlots.get("/", async (c) => {
   const pathParam = z
     .object({ id: z.coerce.number().int().positive() })
     .safeParse(c.req.param());
@@ -45,6 +44,6 @@ app.get("/", async (c) => {
   });
 });
 
-app.all("/", (c) => c.body(null, 405));
+offeringSlots.all("/", (c) => c.body(null, 405));
 
-export default app;
+export { offeringSlots };

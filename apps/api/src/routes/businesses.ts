@@ -1,13 +1,12 @@
-import { businessCollection } from "../resources/business.ts";
-import { paginationSchema } from "../schemas/pagination.ts";
-import { slugSchema } from "../schemas/slug.ts";
+import { businessCollection } from "../resources/index.ts";
+import { paginationSchema, slugSchema } from "../schemas/index.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
-const app = new Hono();
+const businesses = new Hono();
 
-app.get("/", async (c) => {
+businesses.get("/", async (c) => {
   const queryParam = z
     .object({
       slug: slugSchema.optional(),
@@ -38,6 +37,6 @@ app.get("/", async (c) => {
   });
 });
 
-app.all("/", (c) => c.body(null, 405));
+businesses.all("/", (c) => c.body(null, 405));
 
-export default app;
+export { businesses };

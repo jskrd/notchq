@@ -1,5 +1,5 @@
 import { slotCollection } from "../resources/slot.ts";
-import route from "./offering-slots.ts";
+import { offeringSlots as route } from "./offering-slots.ts";
 import { createOffering, createSlot } from "@repo/db/factories/index";
 import { Hono } from "hono";
 import { describe, expect, it } from "vitest";

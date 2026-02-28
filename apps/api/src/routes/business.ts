@@ -1,11 +1,11 @@
-import { businessResource } from "../resources/business.ts";
+import { businessResource } from "../resources/index.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
 
-const app = new Hono();
+const business = new Hono();
 
-app.get("/", async (c) => {
+business.get("/", async (c) => {
   const pathParam = z
     .object({ id: z.coerce.number().int().positive() })
     .safeParse(c.req.param());
@@ -27,6 +27,6 @@ app.get("/", async (c) => {
   });
 });
 
-app.all("/", (c) => c.body(null, 405));
+business.all("/", (c) => c.body(null, 405));
 
-export default app;
+export { business };

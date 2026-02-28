@@ -1,5 +1,5 @@
 import { slotResource } from "../resources/slot.ts";
-import slot from "./slot.ts";
+import { slot } from "./slot.ts";
 import { createSlot } from "@repo/db/factories/index";
 import { Hono } from "hono";
 import { describe, expect, it } from "vitest";

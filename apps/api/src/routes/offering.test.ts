@@ -1,5 +1,5 @@
 import { offeringResource } from "../resources/offering.ts";
-import route from "./offering.ts";
+import { offering as route } from "./offering.ts";
 import { createOffering } from "@repo/db/factories/index";
 import { Hono } from "hono";
 import { describe, expect, it } from "vitest";
