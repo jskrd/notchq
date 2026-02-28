@@ -43,7 +43,7 @@ export async function getOfferings(
   offset: number,
 ): Promise<Offering[]> {
   const response = await fetch(
-    `${env().API_URL}/v1/businesses/${businessId}/offerings?limit=${limit}&offset=${offset}`,
+    `${env().API_URL}/businesses/${businessId}/offerings?limit=${limit}&offset=${offset}`,
     { next: { revalidate: 60 } },
   );
 

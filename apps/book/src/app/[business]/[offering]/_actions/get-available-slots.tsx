@@ -30,7 +30,7 @@ export async function getAvailableSlots(
   const { offeringId, date } = schema.parse(data);
 
   const response = await fetch(
-    `${env().API_URL}/v1/offerings/${offeringId}/slots?date=${date}`,
+    `${env().API_URL}/offerings/${offeringId}/slots?date=${date}`,
   );
 
   if (!response.ok) {

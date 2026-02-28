@@ -1,4 +1,4 @@
-import { businessResource } from "../../../resources/business.ts";
+import { businessResource } from "../../resources/business.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";

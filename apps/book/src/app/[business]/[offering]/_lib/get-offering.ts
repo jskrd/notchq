@@ -19,7 +19,7 @@ export async function getOffering(
   offeringSlug: string,
 ): Promise<Offering | undefined> {
   const response = await fetch(
-    `${env().API_URL}/v1/businesses/${businessId}/offerings?slug=${encodeURIComponent(offeringSlug)}`,
+    `${env().API_URL}/businesses/${businessId}/offerings?slug=${encodeURIComponent(offeringSlug)}`,
     { next: { revalidate: 60 } },
   );
 

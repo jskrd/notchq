@@ -1,4 +1,4 @@
-import { slotResource } from "../../../resources/slot.ts";
+import { slotResource } from "../../resources/slot.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";

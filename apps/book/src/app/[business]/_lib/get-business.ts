@@ -16,7 +16,7 @@ interface ApiBusiness {
 
 export async function getBusiness(slug: string): Promise<Business | undefined> {
   const response = await fetch(
-    `${env().API_URL}/v1/businesses?slug=${encodeURIComponent(slug)}`,
+    `${env().API_URL}/businesses?slug=${encodeURIComponent(slug)}`,
     { next: { revalidate: 60 } },
   );
 

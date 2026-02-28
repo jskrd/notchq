@@ -1,4 +1,4 @@
-import { offeringResource } from "../../../resources/offering.ts";
+import { offeringResource } from "../../resources/offering.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";

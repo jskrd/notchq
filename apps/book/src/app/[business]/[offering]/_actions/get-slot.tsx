@@ -30,7 +30,7 @@ const schema = z.object({
 export async function getSlot(data: unknown): Promise<Slot | null> {
   const { id } = schema.parse(data);
 
-  const response = await fetch(`${env().API_URL}/v1/slots/${id}`);
+  const response = await fetch(`${env().API_URL}/slots/${id}`);
 
   if (!response.ok) {
     return null;
