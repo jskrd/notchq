@@ -20,13 +20,13 @@ export function parseToken(token: string): ParsedToken | null {
     return null;
   }
 
-  const expectedLength =
-    TOKEN_PREFIX.length + SELECTOR_LENGTH + VALIDATOR_LENGTH;
-  if (token.length !== expectedLength) {
+  if (!token.startsWith(TOKEN_PREFIX)) {
     return null;
   }
 
-  if (!token.startsWith(TOKEN_PREFIX)) {
+  const expectedLength =
+    TOKEN_PREFIX.length + SELECTOR_LENGTH + VALIDATOR_LENGTH;
+  if (token.length !== expectedLength) {
     return null;
   }
 
