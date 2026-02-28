@@ -3,7 +3,6 @@ import { createHash, randomBytes, timingSafeEqual } from "crypto";
 const TOKEN_PREFIX = "nq_";
 const SELECTOR_LENGTH = 32;
 const VALIDATOR_LENGTH = 64;
-const TOKEN_LENGTH = TOKEN_PREFIX.length + SELECTOR_LENGTH + VALIDATOR_LENGTH; // 99
 
 export interface ParsedToken {
   selector: string;
@@ -21,7 +20,9 @@ export function parseToken(token: string): ParsedToken | null {
     return null;
   }
 
-  if (token.length !== TOKEN_LENGTH) {
+  const expectedLength =
+    TOKEN_PREFIX.length + SELECTOR_LENGTH + VALIDATOR_LENGTH;
+  if (token.length !== expectedLength) {
     return null;
   }
 
