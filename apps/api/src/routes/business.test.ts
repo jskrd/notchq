@@ -1,5 +1,5 @@
-import { businessResource } from "../../resources/business.ts";
-import route from "./[id].ts";
+import { businessResource } from "../resources/business.ts";
+import route from "./business.ts";
 import { createBusiness } from "@repo/db/factories/index";
 import { Hono } from "hono";
 import { describe, expect, it } from "vitest";

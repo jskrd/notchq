@@ -1,6 +1,6 @@
-import { offeringCollection } from "../../../resources/offering.ts";
-import { paginationSchema } from "../../../schemas/pagination.ts";
-import { slugSchema } from "../../../schemas/slug.ts";
+import { slotCollection } from "../resources/slot.ts";
+import { dateSchema } from "../schemas/date.ts";
+import { paginationSchema } from "../schemas/pagination.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
@@ -17,7 +17,7 @@ app.get("/", async (c) => {
 
   const queryParam = z
     .object({
-      slug: slugSchema.optional(),
+      date: dateSchema,
     })
     .extend(paginationSchema.shape)
     .safeParse(c.req.query());
@@ -25,21 +25,23 @@ app.get("/", async (c) => {
     return c.json(z.flattenError(queryParam.error), 422);
   }
 
-  let query = db()
-    .selectFrom("offerings")
-    .where("business_id", "=", pathParam.data.id)
-    .where("deleted_at", "is", null)
-    .orderBy("name", "asc")
+  const startOfDay = new Date(queryParam.data.date);
+  const endOfDay = new Date(startOfDay);
+  endOfDay.setDate(endOfDay.getDate() + 1);
+
+  const slots = await db()
+    .selectFrom("slots")
+    .where("offering_id", "=", pathParam.data.id)
+    .where("start", ">=", startOfDay)
+    .where("start", "<", endOfDay)
+    .orderBy("start", "asc")
     .limit(queryParam.data.limit)
     .offset(queryParam.data.offset)
-    .selectAll();
-  if (queryParam.data.slug) {
-    query = query.where("slug", "=", queryParam.data.slug);
-  }
-  const offerings = await query.execute();
+    .selectAll()
+    .execute();
 
   return c.json({
-    data: offeringCollection(offerings),
+    data: slotCollection(slots),
   });
 });
 

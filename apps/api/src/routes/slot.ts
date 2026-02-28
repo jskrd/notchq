@@ -1,4 +1,4 @@
-import { offeringResource } from "../../resources/offering.ts";
+import { slotResource } from "../resources/slot.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
@@ -13,18 +13,17 @@ app.get("/", async (c) => {
     return c.notFound();
   }
 
-  const offering = await db()
-    .selectFrom("offerings")
+  const slot = await db()
+    .selectFrom("slots")
     .where("id", "=", pathParam.data.id)
-    .where("deleted_at", "is", null)
     .selectAll()
     .executeTakeFirst();
-  if (!offering) {
+  if (!slot) {
     return c.notFound();
   }
 
   return c.json({
-    data: offeringResource(offering),
+    data: slotResource(slot),
   });
 });
 

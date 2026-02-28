@@ -1,4 +1,4 @@
-import { businessResource } from "../../resources/business.ts";
+import { offeringResource } from "../resources/offering.ts";
 import { db } from "@repo/db/database";
 import { Hono } from "hono";
 import * as z from "zod";
@@ -13,17 +13,18 @@ app.get("/", async (c) => {
     return c.notFound();
   }
 
-  const business = await db()
-    .selectFrom("businesses")
+  const offering = await db()
+    .selectFrom("offerings")
     .where("id", "=", pathParam.data.id)
+    .where("deleted_at", "is", null)
     .selectAll()
     .executeTakeFirst();
-  if (!business) {
+  if (!offering) {
     return c.notFound();
   }
 
   return c.json({
-    data: businessResource(business),
+    data: offeringResource(offering),
   });
 });
 

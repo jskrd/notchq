@@ -1,9 +1,9 @@
-import business from "./routes/businesses/[id].ts";
-import businessOfferings from "./routes/businesses/[id]/offerings.ts";
-import businesses from "./routes/businesses/index.ts";
-import offering from "./routes/offerings/[id].ts";
-import offeringSlots from "./routes/offerings/[id]/slots.ts";
-import slot from "./routes/slots/[id].ts";
+import businessOfferings from "./routes/business-offerings.ts";
+import business from "./routes/business.ts";
+import businesses from "./routes/businesses.ts";
+import offeringSlots from "./routes/offering-slots.ts";
+import offering from "./routes/offering.ts";
+import slot from "./routes/slot.ts";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 
