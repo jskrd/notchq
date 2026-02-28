@@ -10,29 +10,9 @@ export interface ParsedToken {
   validator: string;
 }
 
-const BASE62_CHARS =
-  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-function generateBase62(length: number): string {
-  const bytesNeeded = Math.ceil((length * 6) / 8) + 1;
-  const bytes = randomBytes(bytesNeeded);
-  let value = BigInt("0x" + bytes.toString("hex"));
-
-  let result = "";
-  const radix = BigInt(62);
-
-  while (result.length < length) {
-    const remainder = value % radix;
-    result = BASE62_CHARS[Number(remainder)] + result;
-    value = value / radix;
-  }
-
-  return result.slice(0, length);
-}
-
 export function generateToken(): string {
-  const selector = generateBase62(SELECTOR_LENGTH);
-  const validator = generateBase62(VALIDATOR_LENGTH);
+  const selector = randomBytes(24).toString("base64url"); // 32 chars, 192 bits
+  const validator = randomBytes(48).toString("base64url"); // 64 chars, 384 bits
   return `${TOKEN_PREFIX}${selector}${validator}`;
 }
 
@@ -53,8 +33,8 @@ export function parseToken(token: string): ParsedToken | null {
   const selector = withoutPrefix.slice(0, SELECTOR_LENGTH);
   const validator = withoutPrefix.slice(SELECTOR_LENGTH);
 
-  const base62Regex = /^[0-9A-Za-z]+$/;
-  if (!base62Regex.test(selector) || !base62Regex.test(validator)) {
+  const base64urlRegex = /^[A-Za-z0-9\-_]+$/;
+  if (!base64urlRegex.test(selector) || !base64urlRegex.test(validator)) {
     return null;
   }
 

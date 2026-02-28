@@ -46,8 +46,8 @@ nq_<32 char selector><64 char validator>
 ```
 
 - **Prefix**: `nq_` (identifies as a notchq token)
-- **Selector**: 32 characters, base62 (~190 bits entropy)
-- **Validator**: 64 characters, base62 (~381 bits entropy)
+- **Selector**: 32 characters, base64url (192 bits entropy)
+- **Validator**: 64 characters, base64url (384 bits entropy)
 - **Total length**: 99 characters
 
 **Example:**

@@ -19,12 +19,12 @@ describe("generateToken", () => {
     expect(token.startsWith("nq_")).toBe(true);
   });
 
-  it("generates token with base62 characters only", () => {
+  it("generates token with base64url characters only", () => {
     const token = generateToken();
     const withoutPrefix = token.slice(3);
-    const base62Regex = /^[0-9A-Za-z]+$/;
+    const base64urlRegex = /^[A-Za-z0-9\-_]+$/;
 
-    expect(base62Regex.test(withoutPrefix)).toBe(true);
+    expect(base64urlRegex.test(withoutPrefix)).toBe(true);
   });
 
   it("generates unique tokens", () => {
