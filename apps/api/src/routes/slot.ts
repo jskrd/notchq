@@ -1,32 +1,44 @@
-import { slotResource } from "../resources/index.ts";
+import { slotResource, slotSchema } from "../resources/index.ts";
+import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
 import { db } from "@repo/db/database";
-import { Hono } from "hono";
-import * as z from "zod";
 
-const slot = new Hono();
-
-slot.get("/", async (c) => {
-  const pathParam = z
-    .object({ id: z.coerce.number().int().positive() })
-    .safeParse(c.req.param());
-  if (!pathParam.success) {
-    return c.notFound();
-  }
-
-  const slot = await db()
-    .selectFrom("slots")
-    .where("id", "=", pathParam.data.id)
-    .selectAll()
-    .executeTakeFirst();
-  if (!slot) {
-    return c.notFound();
-  }
-
-  return c.json({
-    data: slotResource(slot),
-  });
+export const getSlotRoute = createRoute({
+  method: "get",
+  path: "/slots/{id}",
+  request: {
+    params: z.object({ id: z.coerce.number().int().positive() }),
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({ data: slotSchema }),
+        },
+      },
+      description: "Slot",
+    },
+    404: {
+      description: "Not found",
+    },
+  },
 });
 
-slot.all("/", (c) => c.body(null, 405));
+export const getSlotHandler: RouteHandler<typeof getSlotRoute> = async (c) => {
+  const { id } = c.req.valid("param");
 
-export { slot };
+  const row = await db()
+    .selectFrom("slots")
+    .where("id", "=", id)
+    .selectAll()
+    .executeTakeFirst();
+  if (!row) {
+    return c.notFound();
+  }
+
+  return c.json(
+    {
+      data: slotResource(row),
+    },
+    200,
+  );
+};

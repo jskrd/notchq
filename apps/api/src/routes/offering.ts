@@ -1,33 +1,47 @@
-import { offeringResource } from "../resources/index.ts";
+import { offeringResource, offeringSchema } from "../resources/index.ts";
+import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
 import { db } from "@repo/db/database";
-import { Hono } from "hono";
-import * as z from "zod";
 
-const offering = new Hono();
+export const getOfferingRoute = createRoute({
+  method: "get",
+  path: "/offerings/{id}",
+  request: {
+    params: z.object({ id: z.coerce.number().int().positive() }),
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({ data: offeringSchema }),
+        },
+      },
+      description: "Offering",
+    },
+    404: {
+      description: "Not found",
+    },
+  },
+});
 
-offering.get("/", async (c) => {
-  const pathParam = z
-    .object({ id: z.coerce.number().int().positive() })
-    .safeParse(c.req.param());
-  if (!pathParam.success) {
-    return c.notFound();
-  }
+export const getOfferingHandler: RouteHandler<typeof getOfferingRoute> = async (
+  c,
+) => {
+  const { id } = c.req.valid("param");
 
-  const offering = await db()
+  const row = await db()
     .selectFrom("offerings")
-    .where("id", "=", pathParam.data.id)
+    .where("id", "=", id)
     .where("deleted_at", "is", null)
     .selectAll()
     .executeTakeFirst();
-  if (!offering) {
+  if (!row) {
     return c.notFound();
   }
 
-  return c.json({
-    data: offeringResource(offering),
-  });
-});
-
-offering.all("/", (c) => c.body(null, 405));
-
-export { offering };
+  return c.json(
+    {
+      data: offeringResource(row),
+    },
+    200,
+  );
+};

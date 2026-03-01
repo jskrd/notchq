@@ -1,49 +1,68 @@
-import { slotCollection } from "../resources/index.ts";
-import { dateSchema, paginationSchema } from "../schemas/index.ts";
+import { slotCollection, slotSchema } from "../resources/index.ts";
+import {
+  dateSchema,
+  paginationSchema,
+  validationErrorSchema,
+} from "../schemas/index.ts";
+import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
 import { db } from "@repo/db/database";
-import { Hono } from "hono";
-import * as z from "zod";
 
-const offeringSlots = new Hono();
+export const listOfferingSlotsRoute = createRoute({
+  method: "get",
+  path: "/offerings/{id}/slots",
+  request: {
+    params: z.object({ id: z.coerce.number().int().positive() }),
+    query: z
+      .object({
+        date: dateSchema,
+      })
+      .extend(paginationSchema.shape),
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({ data: z.array(slotSchema) }),
+        },
+      },
+      description: "List of slots",
+    },
+    422: {
+      content: {
+        "application/json": {
+          schema: validationErrorSchema,
+        },
+      },
+      description: "Validation error",
+    },
+  },
+});
 
-offeringSlots.get("/", async (c) => {
-  const pathParam = z
-    .object({ id: z.coerce.number().int().positive() })
-    .safeParse(c.req.param());
-  if (!pathParam.success) {
-    return c.notFound();
-  }
+export const listOfferingSlotsHandler: RouteHandler<
+  typeof listOfferingSlotsRoute
+> = async (c) => {
+  const { id } = c.req.valid("param");
+  const { date, limit, offset } = c.req.valid("query");
 
-  const queryParam = z
-    .object({
-      date: dateSchema,
-    })
-    .extend(paginationSchema.shape)
-    .safeParse(c.req.query());
-  if (!queryParam.success) {
-    return c.json(z.flattenError(queryParam.error), 422);
-  }
-
-  const startOfDay = new Date(queryParam.data.date);
+  const startOfDay = new Date(date);
   const endOfDay = new Date(startOfDay);
   endOfDay.setDate(endOfDay.getDate() + 1);
 
   const slots = await db()
     .selectFrom("slots")
-    .where("offering_id", "=", pathParam.data.id)
+    .where("offering_id", "=", id)
     .where("start", ">=", startOfDay)
     .where("start", "<", endOfDay)
     .orderBy("start", "asc")
-    .limit(queryParam.data.limit)
-    .offset(queryParam.data.offset)
+    .limit(limit)
+    .offset(offset)
     .selectAll()
     .execute();
 
-  return c.json({
-    data: slotCollection(slots),
-  });
-});
-
-offeringSlots.all("/", (c) => c.body(null, 405));
-
-export { offeringSlots };
+  return c.json(
+    {
+      data: slotCollection(slots),
+    },
+    200,
+  );
+};

@@ -1,42 +1,74 @@
-import { businessCollection } from "../resources/index.ts";
-import { paginationSchema, slugSchema } from "../schemas/index.ts";
+import { businessCollection, businessSchema } from "../resources/index.ts";
+import {
+  paginationSchema,
+  slugSchema,
+  validationErrorSchema,
+} from "../schemas/index.ts";
+import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
 import { db } from "@repo/db/database";
-import { Hono } from "hono";
-import * as z from "zod";
 
-const businesses = new Hono();
+export const listBusinessesRoute = createRoute({
+  method: "get",
+  path: "/businesses",
+  request: {
+    query: z
+      .object({
+        slug: slugSchema.optional(),
+      })
+      .extend(paginationSchema.shape),
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({ data: z.array(businessSchema) }),
+        },
+      },
+      description: "List of businesses",
+    },
+    403: {
+      content: {
+        "application/json": {
+          schema: z.object({ error: z.string() }),
+        },
+      },
+      description: "Forbidden",
+    },
+    422: {
+      content: {
+        "application/json": {
+          schema: validationErrorSchema,
+        },
+      },
+      description: "Validation error",
+    },
+  },
+});
 
-businesses.get("/", async (c) => {
-  const queryParam = z
-    .object({
-      slug: slugSchema.optional(),
-    })
-    .extend(paginationSchema.shape)
-    .safeParse(c.req.query());
-  if (!queryParam.success) {
-    return c.json(z.flattenError(queryParam.error), 422);
-  }
+export const listBusinessesHandler: RouteHandler<
+  typeof listBusinessesRoute
+> = async (c) => {
+  const { slug, limit, offset } = c.req.valid("query");
 
-  if (!queryParam.data.slug) {
+  if (!slug) {
     return c.json({ error: "Listing all businesses is not permitted" }, 403);
   }
 
-  let query = db()
+  let dbQuery = db()
     .selectFrom("businesses")
     .orderBy("name", "asc")
     .selectAll()
-    .limit(queryParam.data.limit)
-    .offset(queryParam.data.offset);
-  if (queryParam.data.slug) {
-    query = query.where("slug", "=", queryParam.data.slug);
+    .limit(limit)
+    .offset(offset);
+  if (slug) {
+    dbQuery = dbQuery.where("slug", "=", slug);
   }
-  const businesses = await query.execute();
+  const rows = await dbQuery.execute();
 
-  return c.json({
-    data: businessCollection(businesses),
-  });
-});
-
-businesses.all("/", (c) => c.body(null, 405));
-
-export { businesses };
+  return c.json(
+    {
+      data: businessCollection(rows),
+    },
+    200,
+  );
+};

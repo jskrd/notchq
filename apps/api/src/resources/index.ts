@@ -1,3 +1,11 @@
-export { businessCollection, businessResource } from "./business.ts";
-export { offeringCollection, offeringResource } from "./offering.ts";
-export { slotCollection, slotResource } from "./slot.ts";
+export {
+  businessCollection,
+  businessResource,
+  businessSchema,
+} from "./business.ts";
+export {
+  offeringCollection,
+  offeringResource,
+  offeringSchema,
+} from "./offering.ts";
+export { slotCollection, slotResource, slotSchema } from "./slot.ts";

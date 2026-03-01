@@ -1,6 +1,24 @@
+import { z } from "@hono/zod-openapi";
 import type { Offering } from "@repo/db/types";
 
-export function offeringResource(offering: Offering) {
+export const offeringSchema = z
+  .object({
+    id: z.number(),
+    business_id: z.number(),
+    slug: z.string(),
+    name: z.string(),
+    description: z.string(),
+    image_url: z.string().nullable(),
+    accent_color: z.string().nullable(),
+    timezone: z.string(),
+    currency: z.string(),
+    created_at: z.string(),
+  })
+  .openapi("Offering");
+
+export function offeringResource(
+  offering: Offering,
+): z.infer<typeof offeringSchema> {
   return {
     id: offering.id,
     business_id: offering.business_id,

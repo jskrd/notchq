@@ -7,7 +7,7 @@
     "db:down": "pnpm --filter @repo/db exec kysely migrate rollback --all",
     "db:seed": "pnpm --filter @repo/db exec kysely seed run",
     "db:up": "pnpm --filter @repo/db exec kysely migrate latest",
-    "dev": "pnpm -r --parallel run dev",
+    "dev": "NODE_ENV=development pnpm -r --parallel run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "knip": "knip",

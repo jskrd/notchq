@@ -1,32 +1,46 @@
-import { businessResource } from "../resources/index.ts";
+import { businessResource, businessSchema } from "../resources/index.ts";
+import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
 import { db } from "@repo/db/database";
-import { Hono } from "hono";
-import * as z from "zod";
 
-const business = new Hono();
-
-business.get("/", async (c) => {
-  const pathParam = z
-    .object({ id: z.coerce.number().int().positive() })
-    .safeParse(c.req.param());
-  if (!pathParam.success) {
-    return c.notFound();
-  }
-
-  const business = await db()
-    .selectFrom("businesses")
-    .where("id", "=", pathParam.data.id)
-    .selectAll()
-    .executeTakeFirst();
-  if (!business) {
-    return c.notFound();
-  }
-
-  return c.json({
-    data: businessResource(business),
-  });
+export const getBusinessRoute = createRoute({
+  method: "get",
+  path: "/businesses/{id}",
+  request: {
+    params: z.object({ id: z.coerce.number().int().positive() }),
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({ data: businessSchema }),
+        },
+      },
+      description: "Business",
+    },
+    404: {
+      description: "Not found",
+    },
+  },
 });
 
-business.all("/", (c) => c.body(null, 405));
+export const getBusinessHandler: RouteHandler<typeof getBusinessRoute> = async (
+  c,
+) => {
+  const { id } = c.req.valid("param");
 
-export { business };
+  const row = await db()
+    .selectFrom("businesses")
+    .where("id", "=", id)
+    .selectAll()
+    .executeTakeFirst();
+  if (!row) {
+    return c.notFound();
+  }
+
+  return c.json(
+    {
+      data: businessResource(row),
+    },
+    200,
+  );
+};

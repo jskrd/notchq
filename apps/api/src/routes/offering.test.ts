@@ -1,18 +1,19 @@
+import { defaultHook } from "../app.ts";
 import { offeringResource } from "../resources/offering.ts";
-import { offering as route } from "./offering.ts";
+import { getOfferingRoute, getOfferingHandler } from "./offering.ts";
+import { OpenAPIHono } from "@hono/zod-openapi";
 import { createOffering } from "@repo/db/factories/index";
-import { Hono } from "hono";
 import { describe, expect, it } from "vitest";
 
-const app = new Hono();
-app.route("/offerings/:id", route);
+const app = new OpenAPIHono({ defaultHook });
+app.openapi(getOfferingRoute, getOfferingHandler);
 
-describe("GET /offerings/:id", () => {
+describe(`${getOfferingRoute.method} ${getOfferingRoute.path}`, () => {
   it.each(["POST", "PUT", "PATCH", "DELETE"])(
-    "%s returns 405",
+    "%s returns 404",
     async (method) => {
       const response = await app.request("/offerings/1", { method });
-      expect(response.status).toBe(405);
+      expect(response.status).toBe(404);
     },
   );
 

@@ -1,18 +1,19 @@
+import { defaultHook } from "../app.ts";
 import { businessResource } from "../resources/business.ts";
-import { business as route } from "./business.ts";
+import { getBusinessRoute, getBusinessHandler } from "./business.ts";
+import { OpenAPIHono } from "@hono/zod-openapi";
 import { createBusiness } from "@repo/db/factories/index";
-import { Hono } from "hono";
 import { describe, expect, it } from "vitest";
 
-const app = new Hono();
-app.route("/businesses/:id", route);
+const app = new OpenAPIHono({ defaultHook });
+app.openapi(getBusinessRoute, getBusinessHandler);
 
-describe("GET /businesses/:id", () => {
+describe(`${getBusinessRoute.method} ${getBusinessRoute.path}`, () => {
   it.each(["POST", "PUT", "PATCH", "DELETE"])(
-    "%s returns 405",
+    "%s returns 404",
     async (method) => {
       const response = await app.request("/businesses/1", { method });
-      expect(response.status).toBe(405);
+      expect(response.status).toBe(404);
     },
   );
 

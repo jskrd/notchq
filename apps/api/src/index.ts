@@ -1,29 +1,18 @@
-import {
-  businessOfferings,
-  business,
-  businesses,
-  offeringSlots,
-  offering,
-  slot,
-} from "./routes/index.ts";
+import { app } from "./app.ts";
 import { serve } from "@hono/node-server";
-import { Hono } from "hono";
+import { writeFileSync } from "fs";
+import { resolve } from "path";
 
-const app = new Hono();
-
-app.route("/businesses", businesses);
-app.route("/businesses/:id", business);
-app.route("/businesses/:id/offerings", businessOfferings);
-app.route("/offerings/:id", offering);
-app.route("/offerings/:id/slots", offeringSlots);
-app.route("/slots/:id", slot);
-
-serve(
-  {
-    fetch: app.fetch,
-    port: 3001,
-  },
-  (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
-  },
+writeFileSync(
+  resolve("./public/openapi.json"),
+  JSON.stringify(
+    app.getOpenAPIDocument({
+      openapi: "3.0.0" as const,
+      info: { title: "NotchQ API", version: "1.0.0" },
+    }),
+  ),
 );
+
+serve({ fetch: app.fetch, port: 3001 }, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});

@@ -1,6 +1,18 @@
+import { z } from "@hono/zod-openapi";
 import type { Business } from "@repo/db/types";
 
-export function businessResource(business: Business) {
+export const businessSchema = z
+  .object({
+    id: z.number(),
+    slug: z.string(),
+    name: z.string(),
+    created_at: z.string(),
+  })
+  .openapi("Business");
+
+export function businessResource(
+  business: Business,
+): z.infer<typeof businessSchema> {
   return {
     id: business.id,
     slug: business.slug,

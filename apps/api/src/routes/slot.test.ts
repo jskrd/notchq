@@ -1,18 +1,19 @@
+import { defaultHook } from "../app.ts";
 import { slotResource } from "../resources/slot.ts";
-import { slot } from "./slot.ts";
+import { getSlotRoute, getSlotHandler } from "./slot.ts";
+import { OpenAPIHono } from "@hono/zod-openapi";
 import { createSlot } from "@repo/db/factories/index";
-import { Hono } from "hono";
 import { describe, expect, it } from "vitest";
 
-const app = new Hono();
-app.route("/slots/:id", slot);
+const app = new OpenAPIHono({ defaultHook });
+app.openapi(getSlotRoute, getSlotHandler);
 
-describe("GET /slots/:id", () => {
+describe(`${getSlotRoute.method} ${getSlotRoute.path}`, () => {
   it.each(["POST", "PUT", "PATCH", "DELETE"])(
-    "%s returns 405",
+    "%s returns 404",
     async (method) => {
       const response = await app.request("/slots/1", { method });
-      expect(response.status).toBe(405);
+      expect(response.status).toBe(404);
     },
   );
 
