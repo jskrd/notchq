@@ -10,7 +10,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "lucide-react": "^0.575.0",
+    "lucide-react": "^0.577.0",
     "next": "^16.1.6",
     "radix-ui": "^1.4.3",
     "react": "^19.2.4",
@@ -27,7 +27,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "clsx": "^2.1.1",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.8",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1"
   }
