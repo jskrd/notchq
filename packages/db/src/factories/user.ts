@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { hashPassword } from "@repo/auth/password";
+import { hashPassword } from "@repo/auth";
 import { db } from "@repo/db/database";
 import type { NewUser, User } from "@repo/db/types";
 
