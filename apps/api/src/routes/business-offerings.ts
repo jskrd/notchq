@@ -5,7 +5,7 @@ import {
   validationErrorSchema,
 } from "../schemas/index.ts";
 import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
-import { db } from "@repo/db/database";
+import { db } from "@repo/db";
 
 export const listBusinessOfferingsRoute = createRoute({
   method: "get",

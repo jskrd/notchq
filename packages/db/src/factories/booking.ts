@@ -1,7 +1,7 @@
+import { db } from "../database.ts";
+import type { Booking, NewBooking } from "../types.ts";
 import { createBasket } from "./basket.js";
 import { faker } from "@faker-js/faker";
-import { db } from "@repo/db/database";
-import type { Booking, NewBooking } from "@repo/db/types";
 
 export async function createBooking(
   overrides: Partial<NewBooking> = {},

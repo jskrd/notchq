@@ -1,5 +1,5 @@
 import { z } from "@hono/zod-openapi";
-import type { Slot } from "@repo/db/types";
+import type { Slot } from "@repo/db";
 
 export const slotSchema = z
   .object({

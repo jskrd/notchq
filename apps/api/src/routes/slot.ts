@@ -1,6 +1,6 @@
 import { slotResource, slotSchema } from "../resources/index.ts";
 import { type RouteHandler, createRoute, z } from "@hono/zod-openapi";
-import { db } from "@repo/db/database";
+import { db } from "@repo/db";
 
 export const getSlotRoute = createRoute({
   method: "get",

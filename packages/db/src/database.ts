@@ -1,4 +1,4 @@
-import type { Database } from "@repo/db/types";
+import type { Database } from "./types.ts";
 import { env } from "@repo/env";
 import { Kysely, PostgresDialect, sql } from "kysely";
 import Pool from "pg-pool";

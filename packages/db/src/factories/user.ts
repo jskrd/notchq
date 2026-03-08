@@ -1,7 +1,7 @@
+import { db } from "../database.ts";
+import type { NewUser, User } from "../types.ts";
 import { faker } from "@faker-js/faker";
 import { hashPassword } from "@repo/auth";
-import { db } from "@repo/db/database";
-import type { NewUser, User } from "@repo/db/types";
 
 export async function createUser(
   overrides: Partial<NewUser> = {},

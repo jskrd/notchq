@@ -1,8 +1,8 @@
+import { db } from "../database.ts";
+import type { BasketAddOn, NewBasketAddOn } from "../types.ts";
 import { createAddOn } from "./add-on.js";
 import { createBasket } from "./basket.js";
 import { faker } from "@faker-js/faker";
-import { db } from "@repo/db/database";
-import type { BasketAddOn, NewBasketAddOn } from "@repo/db/types";
 
 export async function createBasketAddOn(
   overrides: Partial<NewBasketAddOn> = {},

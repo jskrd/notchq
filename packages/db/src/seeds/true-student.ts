@@ -1,11 +1,11 @@
-import { db } from "@repo/db/database";
+import { db } from "../database.ts";
 import type {
   Business,
   NewOffering,
   NewSlot,
   Offering,
   Slot,
-} from "@repo/db/types";
+} from "../types.ts";
 import { RRule } from "rrule";
 
 export async function seed(): Promise<void> {

@@ -1,7 +1,7 @@
+import { db } from "../database.ts";
+import type { BusinessUser, NewBusinessUser } from "../types.ts";
 import { createBusiness } from "./business.js";
 import { createUser } from "./user.js";
-import { db } from "@repo/db/database";
-import type { BusinessUser, NewBusinessUser } from "@repo/db/types";
 
 export async function createBusinessUser(
   overrides: Partial<NewBusinessUser> = {},

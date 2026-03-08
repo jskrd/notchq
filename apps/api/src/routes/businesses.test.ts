@@ -2,7 +2,7 @@ import { defaultHook } from "../app.ts";
 import { businessCollection } from "../resources/business.ts";
 import { listBusinessesRoute, listBusinessesHandler } from "./businesses.ts";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { createBusiness } from "@repo/db/factories/index";
+import { createBusiness } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 const app = new OpenAPIHono({ defaultHook });

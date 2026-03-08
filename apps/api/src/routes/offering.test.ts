@@ -2,7 +2,7 @@ import { defaultHook } from "../app.ts";
 import { offeringResource } from "../resources/offering.ts";
 import { getOfferingRoute, getOfferingHandler } from "./offering.ts";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { createOffering } from "@repo/db/factories/index";
+import { createOffering } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 const app = new OpenAPIHono({ defaultHook });

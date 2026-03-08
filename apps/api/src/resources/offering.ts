@@ -1,5 +1,5 @@
 import { z } from "@hono/zod-openapi";
-import type { Offering } from "@repo/db/types";
+import type { Offering } from "@repo/db";
 
 export const offeringSchema = z
   .object({

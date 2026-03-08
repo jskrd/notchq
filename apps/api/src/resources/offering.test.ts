@@ -1,5 +1,5 @@
 import { offeringCollection, offeringResource } from "./offering.ts";
-import { createOffering } from "@repo/db/factories/index";
+import { createOffering } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 describe(offeringResource.name, () => {

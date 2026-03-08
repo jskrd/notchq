@@ -1,5 +1,5 @@
 import { z } from "@hono/zod-openapi";
-import type { Business } from "@repo/db/types";
+import type { Business } from "@repo/db";
 
 export const businessSchema = z
   .object({

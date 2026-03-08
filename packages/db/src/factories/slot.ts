@@ -1,7 +1,7 @@
+import { db } from "../database.ts";
+import type { NewSlot, Slot } from "../types.ts";
 import { createOffering } from "./offering.js";
 import { faker } from "@faker-js/faker";
-import { db } from "@repo/db/database";
-import type { NewSlot, Slot } from "@repo/db/types";
 
 export async function createSlot(
   overrides: Partial<NewSlot> = {},

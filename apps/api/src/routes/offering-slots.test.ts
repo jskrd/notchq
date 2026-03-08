@@ -5,7 +5,7 @@ import {
   listOfferingSlotsHandler,
 } from "./offering-slots.ts";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { createOffering, createSlot } from "@repo/db/factories/index";
+import { createOffering, createSlot } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 const app = new OpenAPIHono({ defaultHook });

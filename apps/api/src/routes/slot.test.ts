@@ -2,7 +2,7 @@ import { defaultHook } from "../app.ts";
 import { slotResource } from "../resources/slot.ts";
 import { getSlotRoute, getSlotHandler } from "./slot.ts";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { createSlot } from "@repo/db/factories/index";
+import { createSlot } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 const app = new OpenAPIHono({ defaultHook });

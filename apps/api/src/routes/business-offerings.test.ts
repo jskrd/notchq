@@ -5,7 +5,7 @@ import {
   listBusinessOfferingsHandler,
 } from "./business-offerings.ts";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { createBusiness, createOffering } from "@repo/db/factories/index";
+import { createBusiness, createOffering } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 const app = new OpenAPIHono({ defaultHook });

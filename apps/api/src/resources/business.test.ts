@@ -1,5 +1,5 @@
 import { businessCollection, businessResource } from "./business.ts";
-import { createBusiness } from "@repo/db/factories/index";
+import { createBusiness } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 describe(businessResource.name, () => {

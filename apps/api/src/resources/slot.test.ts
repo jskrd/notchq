@@ -1,5 +1,5 @@
 import { slotCollection, slotResource } from "./slot.ts";
-import { createSlot } from "@repo/db/factories/index";
+import { createSlot } from "@repo/db/factories";
 import { describe, expect, it } from "vitest";
 
 describe(slotResource.name, () => {

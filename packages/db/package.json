@@ -2,7 +2,8 @@
   "name": "@repo/db",
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts"
+    ".": "./src/index.ts",
+    "./factories": "./src/factories/index.ts"
   },
   "scripts": {
     "lint": "eslint",

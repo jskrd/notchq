@@ -1,8 +1,8 @@
+import { db } from "../database.ts";
+import type { BasketSlot, NewBasketSlot } from "../types.ts";
 import { createBasket } from "./basket.js";
 import { createSlot } from "./slot.js";
 import { faker } from "@faker-js/faker";
-import { db } from "@repo/db/database";
-import type { BasketSlot, NewBasketSlot } from "@repo/db/types";
 
 export async function createBasketSlot(
   overrides: Partial<NewBasketSlot> = {},

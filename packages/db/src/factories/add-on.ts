@@ -1,7 +1,7 @@
+import { db } from "../database.ts";
+import type { AddOn, NewAddOn } from "../types.ts";
 import { createOffering } from "./offering.js";
 import { faker } from "@faker-js/faker";
-import { db } from "@repo/db/database";
-import type { AddOn, NewAddOn } from "@repo/db/types";
 
 export async function createAddOn(
   overrides: Partial<NewAddOn> = {},

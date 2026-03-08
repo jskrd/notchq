@@ -1,5 +1,5 @@
-import { db } from "@repo/db/database";
-import type { Basket, NewBasket } from "@repo/db/types";
+import { db } from "../database.ts";
+import type { Basket, NewBasket } from "../types.ts";
 
 export async function createBasket(
   overrides: Partial<NewBasket> = {},
