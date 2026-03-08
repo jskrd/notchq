@@ -133,9 +133,6 @@ importers:
       openapi-fetch:
         specifier: ^0.17.0
         version: 0.17.0
-      zod:
-        specifier: ^4.3.6
-        version: 4.3.6
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -180,9 +177,6 @@ importers:
       pg-pool:
         specifier: ^3.12.0
         version: 3.12.0(pg@8.19.0)
-      zod:
-        specifier: ^4.3.6
-        version: 4.3.6
     devDependencies:
       '@faker-js/faker':
         specifier: ^10.3.0
@@ -245,9 +239,6 @@ importers:
       redis:
         specifier: ^5.11.0
         version: 5.11.0
-      zod:
-        specifier: ^4.3.6
-        version: 4.3.6
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
