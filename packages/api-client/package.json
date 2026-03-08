@@ -1,0 +1,21 @@
+{
+  "name": "@repo/api-client",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "generate": "openapi-typescript ../../apps/api/public/openapi.json -o src/types.ts",
+    "lint": "eslint",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.17.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "openapi-typescript": "^7.13.0"
+  }
+}
