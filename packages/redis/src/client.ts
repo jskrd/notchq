@@ -1,4 +1,4 @@
-import { env } from "./env.ts";
+import { env } from "@repo/env";
 import { createClient } from "redis";
 
 export type RedisClient = ReturnType<typeof createClient>;

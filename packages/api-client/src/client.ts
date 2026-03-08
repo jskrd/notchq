@@ -1,5 +1,5 @@
-import { env } from "./env";
-import type { paths } from "./types";
+import type { paths } from "./types.ts";
+import { env } from "@repo/env";
 import createFetchClient, { Client } from "openapi-fetch";
 
 let client: Client<paths, `${string}/${string}`> | null = null;

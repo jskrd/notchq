@@ -1,14 +1,8 @@
-import { existsSync } from "fs";
+import { env } from "@repo/env";
 import type { NextConfig } from "next";
-import { resolve } from "path";
 
-const envPath = resolve(
-  import.meta.dirname,
-  `../../.env.${process.env["NODE_ENV"]}`,
-);
-if (existsSync(envPath)) {
-  process.loadEnvFile(envPath);
-}
+// Load and validate environment variables before the app starts
+env();
 
 const nextConfig: NextConfig = {
   images: {

@@ -9,6 +9,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@repo/env": "workspace:*",
     "kysely": "0.28.11",
     "kysely-ctl": "0.20.0",
     "pg": "^8.19.0",

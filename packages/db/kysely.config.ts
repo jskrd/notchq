@@ -1,4 +1,4 @@
-import { env } from "@repo/db/env";
+import { env } from "@repo/env";
 import { PostgresDialect } from "kysely";
 import { defineConfig } from "kysely-ctl";
 import Pool from "pg-pool";
