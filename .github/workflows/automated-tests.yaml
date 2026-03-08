@@ -9,7 +9,7 @@ on:
 
 jobs:
   test-unit:
-    name: Test Unit
+    name: Test unit
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -25,7 +25,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v6
 
       - name: Setup pnpm
@@ -37,29 +37,29 @@ jobs:
           cache: "pnpm"
           node-version-file: ".nvmrc"
 
-      - name: Install Dependencies
+      - name: Install pnpm dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Create Test Database
+      - name: Create test database
         env:
           PGPASSWORD: postgres
         run: createdb -h localhost -U postgres notchq_test
 
-      - name: Create .env
+      - name: Create .env file
         run: cp .env.example .env
 
-      - name: Append Test Environment Variables
+      - name: Append test environment variables
         run: |
           cat >> .env <<EOF
           DB_URL=postgresql://postgres:postgres@localhost:5432/notchq_test
           EOF
 
-      - name: Run Migrations
+      - name: Run database migrations
         env:
           NODE_ENV: test
         run: pnpm run db:up
 
-      - name: Test Unit
+      - name: Run unit tests
         env:
           NODE_ENV: test
         run: pnpm run test
