@@ -1,4 +1,4 @@
-import { apiClient } from "@repo/api-client/client";
+import { apiClient } from "@repo/api-client";
 import type { Offering } from "@repo/book/app/[business]/_lib/get-offerings";
 
 export async function getOffering(

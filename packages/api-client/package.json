@@ -2,7 +2,7 @@
   "name": "@repo/api-client",
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "generate": "openapi-typescript ../../apps/api/public/openapi.json -o src/types.ts",

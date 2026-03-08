@@ -1,4 +1,4 @@
-import { apiClient } from "@repo/api-client/client";
+import { apiClient } from "@repo/api-client";
 import { extractImageColorAccent } from "@repo/book/lib/extract-image-accent-color";
 import { unstable_cache } from "next/cache";
 

@@ -1,4 +1,4 @@
-import { apiClient } from "@repo/api-client/client";
+import { apiClient } from "@repo/api-client";
 
 export interface Business {
   id: number;

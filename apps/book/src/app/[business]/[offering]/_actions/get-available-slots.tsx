@@ -1,6 +1,6 @@
 "use server";
 
-import { apiClient } from "@repo/api-client/client";
+import { apiClient } from "@repo/api-client";
 import z from "zod";
 
 export interface AvailableSlot {
