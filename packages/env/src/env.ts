@@ -21,11 +21,6 @@ export function env(): Env {
 
   loadEnvFile(".env");
 
-  const nodeEnv = process.env["NODE_ENV"];
-  if (nodeEnv) {
-    loadEnvFile(`.env.${nodeEnv}`);
-  }
-
   _env = envSchema.parse(process.env);
   return _env;
 }

@@ -45,6 +45,15 @@ jobs:
           PGPASSWORD: postgres
         run: createdb -h localhost -U postgres notchq_test
 
+      - name: Create .env
+        run: cp .env.example .env
+
+      - name: Append Test Environment Variables
+        run: |
+          cat >> .env <<EOF
+          DB_URL=postgresql://postgres:postgres@localhost:5432/notchq_test
+          EOF
+
       - name: Run Migrations
         env:
           NODE_ENV: test
