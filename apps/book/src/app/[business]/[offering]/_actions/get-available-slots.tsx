@@ -1,22 +1,12 @@
 "use server";
 
-import { env } from "@repo/book/lib/env";
+import { apiClient } from "@repo/api-client/client";
 import z from "zod";
 
 export interface AvailableSlot {
   id: number;
   start: Date;
   duration: number;
-}
-
-interface ApiSlot {
-  id: number;
-  offering_id: number;
-  start: string;
-  duration: number;
-  price: number;
-  capacity: number | null;
-  created_at: string;
 }
 
 const schema = z.object({
@@ -29,17 +19,18 @@ export async function getAvailableSlots(
 ): Promise<AvailableSlot[]> {
   const { offeringId, date } = schema.parse(data);
 
-  const response = await fetch(
-    `${env().API_URL}/offerings/${offeringId}/slots?date=${date}`,
+  const { data: responseData, error } = await apiClient().GET(
+    "/offerings/{id}/slots",
+    {
+      params: { path: { id: offeringId }, query: { date } },
+    },
   );
 
-  if (!response.ok) {
+  if (error) {
     return [];
   }
 
-  const json = (await response.json()) as { data: ApiSlot[] };
-
-  return json.data.map((slot) => ({
+  return responseData.data.map((slot) => ({
     id: slot.id,
     start: new Date(slot.start),
     duration: slot.duration,

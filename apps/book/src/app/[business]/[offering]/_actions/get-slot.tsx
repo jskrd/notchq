@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "@repo/book/lib/env";
+import { apiClient } from "@repo/api-client/client";
 import z from "zod";
 
 export interface Slot {
@@ -13,16 +13,6 @@ export interface Slot {
   created_at: Date;
 }
 
-interface ApiSlot {
-  id: number;
-  offering_id: number;
-  start: string;
-  duration: number;
-  price: number;
-  capacity: number | null;
-  created_at: string;
-}
-
 const schema = z.object({
   id: z.number().int().positive(),
 });
@@ -30,17 +20,17 @@ const schema = z.object({
 export async function getSlot(data: unknown): Promise<Slot | null> {
   const { id } = schema.parse(data);
 
-  const response = await fetch(`${env().API_URL}/slots/${id}`);
+  const { data: responseData, error } = await apiClient().GET("/slots/{id}", {
+    params: { path: { id } },
+  });
 
-  if (!response.ok) {
+  if (error || !responseData) {
     return null;
   }
 
-  const json = (await response.json()) as { data: ApiSlot };
-
   return {
-    ...json.data,
-    start: new Date(json.data.start),
-    created_at: new Date(json.data.created_at),
+    ...responseData.data,
+    start: new Date(responseData.data.start),
+    created_at: new Date(responseData.data.created_at),
   };
 }

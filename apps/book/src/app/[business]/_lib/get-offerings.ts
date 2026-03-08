@@ -1,4 +1,4 @@
-import { env } from "@repo/book/lib/env";
+import { apiClient } from "@repo/api-client/client";
 import { extractImageColorAccent } from "@repo/book/lib/extract-image-accent-color";
 import { unstable_cache } from "next/cache";
 
@@ -15,19 +15,6 @@ export interface Offering {
   created_at: Date;
 }
 
-interface ApiOffering {
-  id: number;
-  business_id: number;
-  slug: string;
-  name: string;
-  description: string;
-  image_url: string | null;
-  accent_color: string | null;
-  timezone: string;
-  currency: string;
-  created_at: string;
-}
-
 const getCachedImageAccentColor = unstable_cache(
   async (url: string) => extractImageColorAccent(url),
   ["image-accent-color"],
@@ -42,17 +29,16 @@ export async function getOfferings(
   limit: number,
   offset: number,
 ): Promise<Offering[]> {
-  const response = await fetch(
-    `${env().API_URL}/businesses/${businessId}/offerings?limit=${limit}&offset=${offset}`,
-    { next: { revalidate: 60 } },
-  );
+  const { data, error } = await apiClient().GET("/businesses/{id}/offerings", {
+    params: { path: { id: businessId }, query: { limit, offset } },
+    next: { revalidate: 60 },
+  });
 
-  if (!response.ok) {
+  if (error) {
     return [];
   }
 
-  const json = (await response.json()) as { data: ApiOffering[] };
-  const offerings: Offering[] = json.data.map((offering) => ({
+  const offerings: Offering[] = data.data.map((offering) => ({
     ...offering,
     created_at: new Date(offering.created_at),
   }));

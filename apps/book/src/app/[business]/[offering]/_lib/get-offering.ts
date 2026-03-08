@@ -1,34 +1,20 @@
+import { apiClient } from "@repo/api-client/client";
 import type { Offering } from "@repo/book/app/[business]/_lib/get-offerings";
-import { env } from "@repo/book/lib/env";
-
-interface ApiOffering {
-  id: number;
-  business_id: number;
-  slug: string;
-  name: string;
-  description: string;
-  image_url: string | null;
-  accent_color: string | null;
-  timezone: string;
-  currency: string;
-  created_at: string;
-}
 
 export async function getOffering(
   businessId: number,
   offeringSlug: string,
 ): Promise<Offering | undefined> {
-  const response = await fetch(
-    `${env().API_URL}/businesses/${businessId}/offerings?slug=${encodeURIComponent(offeringSlug)}`,
-    { next: { revalidate: 60 } },
-  );
+  const { data, error } = await apiClient().GET("/businesses/{id}/offerings", {
+    params: { path: { id: businessId }, query: { slug: offeringSlug } },
+    next: { revalidate: 60 },
+  });
 
-  if (!response.ok) {
+  if (error) {
     return undefined;
   }
 
-  const json = (await response.json()) as { data: ApiOffering[] };
-  const offering = json.data[0];
+  const offering = data.data[0];
   if (!offering) {
     return undefined;
   }

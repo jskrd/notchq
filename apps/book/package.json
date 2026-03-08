@@ -10,6 +10,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@repo/api-client": "workspace:*",
     "lucide-react": "^0.575.0",
     "next": "^16.1.6",
     "radix-ui": "^1.4.3",

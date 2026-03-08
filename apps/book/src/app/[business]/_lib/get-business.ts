@@ -1,4 +1,4 @@
-import { env } from "@repo/book/lib/env";
+import { apiClient } from "@repo/api-client/client";
 
 export interface Business {
   id: number;
@@ -7,26 +7,17 @@ export interface Business {
   created_at: Date;
 }
 
-interface ApiBusiness {
-  id: number;
-  slug: string;
-  name: string;
-  created_at: string;
-}
-
 export async function getBusiness(slug: string): Promise<Business | undefined> {
-  const response = await fetch(
-    `${env().API_URL}/businesses?slug=${encodeURIComponent(slug)}`,
-    { next: { revalidate: 60 } },
-  );
+  const { data, error } = await apiClient().GET("/businesses", {
+    params: { query: { slug } },
+    next: { revalidate: 60 },
+  });
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch business: ${response.status}`);
+  if (error) {
+    throw new Error(`Failed to fetch business`);
   }
 
-  const json = (await response.json()) as { data: ApiBusiness[] };
-
-  const business = json.data[0];
+  const business = data.data[0];
   if (!business) {
     return undefined;
   }
