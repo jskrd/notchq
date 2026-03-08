@@ -116,7 +116,7 @@ Build the core token-based authentication:
 - [x] Password hashing utilities in `packages/auth`
 - [x] Token generation/validation in `packages/auth`
 - [x] Login endpoint in `apps/api`
-- [ ] Registration endpoint in `apps/api`
+- [x] Registration endpoint in `apps/api`
 - [ ] Token validation middleware in `apps/api`
 
 ### Phase 2: Session logic in packages/auth

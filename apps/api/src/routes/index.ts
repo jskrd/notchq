@@ -11,3 +11,4 @@ export {
 export { getOfferingRoute, getOfferingHandler } from "./offering.ts";
 export { getSlotRoute, getSlotHandler } from "./slot.ts";
 export { createTokenRoute, createTokenHandler } from "./tokens.ts";
+export { createUserRoute, createUserHandler } from "./users.ts";

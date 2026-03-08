@@ -10,3 +10,4 @@ export {
 } from "./offering.ts";
 export { slotCollection, slotResource, slotSchema } from "./slot.ts";
 export { tokenResource, tokenSchema } from "./token.ts";
+export { userResource, userSchema } from "./user.ts";
