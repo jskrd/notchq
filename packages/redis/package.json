@@ -2,7 +2,7 @@
   "name": "@repo/redis",
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "lint": "eslint",
