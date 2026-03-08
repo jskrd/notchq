@@ -11,8 +11,7 @@
   },
   "dependencies": {
     "@repo/env": "workspace:*",
-    "openapi-fetch": "^0.17.0",
-    "zod": "^4.3.6"
+    "openapi-fetch": "^0.17.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
