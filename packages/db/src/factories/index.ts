@@ -8,4 +8,5 @@ export { createBusinessUser } from "./business-user.js";
 export { createOffering } from "./offering.js";
 export { createPayment } from "./payment.js";
 export { createSlot } from "./slot.js";
+export { createToken } from "./token.js";
 export { createUser } from "./user.js";

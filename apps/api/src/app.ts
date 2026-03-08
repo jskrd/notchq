@@ -1,4 +1,6 @@
 import {
+  createTokenHandler,
+  createTokenRoute,
   getBusinessHandler,
   getBusinessRoute,
   getOfferingHandler,
@@ -40,5 +42,7 @@ app.openapi(getOfferingRoute, getOfferingHandler);
 app.openapi(listOfferingSlotsRoute, listOfferingSlotsHandler);
 
 app.openapi(getSlotRoute, getSlotHandler);
+
+app.openapi(createTokenRoute, createTokenHandler);
 
 app.use("/*", serveStatic({ root: "./public" }));

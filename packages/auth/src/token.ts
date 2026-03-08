@@ -3,6 +3,7 @@ import { createHash, randomBytes, timingSafeEqual } from "crypto";
 const TOKEN_PREFIX = "nq_";
 const SELECTOR_LENGTH = 32;
 const VALIDATOR_LENGTH = 64;
+const TOKEN_LIFETIME_MS = 30 * 24 * 60 * 60 * 1000;
 
 export interface ParsedToken {
   selector: string;
@@ -40,6 +41,10 @@ export function parseToken(token: string): ParsedToken | null {
   }
 
   return { selector, validator };
+}
+
+export function tokenExpiresAt(): Date {
+  return new Date(Date.now() + TOKEN_LIFETIME_MS);
 }
 
 export function hashValidator(validator: string): string {

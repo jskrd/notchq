@@ -1,4 +1,8 @@
-import { hashPassword, verifyPassword } from "./password.ts";
+import {
+  dummyVerifyPassword,
+  hashPassword,
+  verifyPassword,
+} from "./password.ts";
 import { describe, expect, it } from "vitest";
 
 describe("hashPassword", () => {
@@ -42,5 +46,11 @@ describe("verifyPassword", () => {
 
   it("throws for empty digest", async () => {
     await expect(verifyPassword("", "password")).rejects.toThrow(TypeError);
+  });
+});
+
+describe("dummyVerifyPassword", () => {
+  it("resolves without throwing", async () => {
+    await expect(dummyVerifyPassword()).resolves.toBeUndefined();
   });
 });

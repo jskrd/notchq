@@ -19,6 +19,7 @@ export interface Database {
   offerings: OfferingTable;
   payments: PaymentTable;
   slots: SlotTable;
+  tokens: TokenTable;
   users: UserTable;
 }
 
@@ -198,6 +199,19 @@ export interface SlotTable {
 export type Slot = Selectable<SlotTable>;
 export type NewSlot = Insertable<SlotTable>;
 export type SlotUpdate = Updateable<SlotTable>;
+
+export interface TokenTable {
+  id: Generated<number>;
+  user_id: number;
+  selector: string;
+  validator_hash: string;
+  created_at: ColumnType<Date, string | undefined, never>;
+  expires_at: ColumnType<Date, string, string>;
+  last_used_at: ColumnType<Date | null, string | undefined, string>;
+}
+export type Token = Selectable<TokenTable>;
+export type NewToken = Insertable<TokenTable>;
+export type TokenUpdate = Updateable<TokenTable>;
 
 export interface UserTable {
   id: Generated<number>;

@@ -2,6 +2,7 @@ import {
   generateToken,
   hashValidator,
   parseToken,
+  tokenExpiresAt,
   verifyValidator,
 } from "./token.ts";
 import { describe, expect, it } from "vitest";
@@ -112,6 +113,17 @@ describe("hashValidator", () => {
 
     expect(hash).toHaveLength(64);
     expect(/^[0-9a-f]+$/.test(hash)).toBe(true);
+  });
+});
+
+describe("tokenExpiresAt", () => {
+  it("returns a date 30 days in the future", () => {
+    const before = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    const result = tokenExpiresAt();
+    const after = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+    expect(result.getTime()).toBeGreaterThanOrEqual(before.getTime());
+    expect(result.getTime()).toBeLessThanOrEqual(after.getTime());
   });
 });
 
