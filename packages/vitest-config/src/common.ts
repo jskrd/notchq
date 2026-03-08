@@ -1,6 +1,6 @@
 import { defineConfig } from "vitest/config";
 
-export default defineConfig({
+export const commonConfig = defineConfig({
   test: {
     include: ["src/**/*.test.ts"],
   },

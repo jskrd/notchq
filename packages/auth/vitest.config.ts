@@ -1,3 +1,3 @@
-import config from "@repo/vitest-config/common";
+import { commonConfig } from "@repo/vitest-config";
 
-export default config;
+export default commonConfig;
