@@ -9,7 +9,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@hono/node-server": "^1.19.9",
+    "@hono/node-server": "^1.19.11",
     "@hono/zod-openapi": "^1.2.2",
     "@repo/auth": "workspace:*",
     "@repo/db": "workspace:*",
