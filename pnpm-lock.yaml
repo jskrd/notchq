@@ -106,6 +106,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@repo/vitest-config':
+        specifier: workspace:*
+        version: link:../../packages/vitest-config
       '@tailwindcss/postcss':
         specifier: ^4.2.1
         version: 4.2.1
