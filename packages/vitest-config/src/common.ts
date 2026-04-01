@@ -9,5 +9,6 @@ export const commonConfig = defineConfig({
       reporter: ["text"],
     },
     include: ["src/**/*.test.ts"],
+    reporters: ["dot"],
   },
 });
