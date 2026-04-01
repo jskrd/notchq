@@ -5,6 +5,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "coverage": "vitest run --coverage",
     "lint": "eslint",
     "test": "vitest run",
     "typecheck": "tsc"
@@ -15,6 +16,8 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@repo/vitest-config": "workspace:*"
+    "@repo/vitest-config": "workspace:*",
+    "@vitest/coverage-v8": "^4.1.2",
+    "vitest": "^4.1.2"
   }
 }
