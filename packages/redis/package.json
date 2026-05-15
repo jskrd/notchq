@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@repo/env": "workspace:*",
-    "redis": "^5.11.0"
+    "redis": "^5.12.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
